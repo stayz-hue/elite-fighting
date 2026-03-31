@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>엘리트손해사정법인</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+:root{--navy:#1c2b4a;--navy-dk:#141f36;--navy-lt:#eef1f7;--gold:#c8851a;--gold-lt:#fdf4e7;--gold-bd:#f0c87a;--border:#e2e5eb;--gray:#f4f5f8;--text:#16191f;--muted:#636878;--hint:#9ea3b0;--white:#fff;--radius:12px;--red:#c0392b;--green:#2e7d32;--green-lt:#e8f5e9;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{height:100%;}
+body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background:var(--gray);color:var(--text);-webkit-font-smoothing:antialiased;}
+.app-shell{width:100%;display:flex;flex-direction:column;}
+@media(min-width:600px){body{display:flex;justify-content:center;align-items:flex-start;padding:32px 16px 60px;min-height:100vh;}.app-shell{width:460px;border-radius:20px;overflow:hidden;box-shadow:0 8px 48px rgba(28,43,74,.2);}}
+#page-wrap{flex:1;display:flex;flex-direction:column;}
+.header{background:var(--navy);padding:12px 18px 10px;display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--gold);}
+.header-logo{width:44px;height:44px;border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);object-fit:cover;}
+.header-name{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.4px;line-height:1.3;}.header-name span{color:var(--gold-bd);}
+.header-sub{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:3px;}
+.trust-bar{background:var(--navy-dk);padding:4px 18px;display:flex;align-items:center;gap:16px;}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:9.5px;color:rgba(255,255,255,.5);font-weight:500;}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+
+.usp{background:var(--navy-dk);padding:8px 20px 6px;}.usp-label{font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(240,200,122,.55);display:flex;align-items:center;gap:8px;margin-bottom:8px;}.usp-label::before{content:'';width:16px;height:1.5px;background:rgba(240,200,122,.55);}
+.usp-phrase-wrap{position:relative;min-height:108px;display:flex;align-items:center;justify-content:center;cursor:pointer;}.usp-phrase{position:absolute;width:100%;text-align:center;opacity:0;transition:opacity .75s;pointer-events:none;}.usp-phrase.active{opacity:1;pointer-events:auto;}
+.usp-ph-big{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.35;}.usp-ph-sm{font-size:13px;color:rgba(255,255,255,.58);line-height:1.7;margin-top:6px;}
+.usp-ph-list{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:6px;}.usp-ph-end{font-size:14px;font-weight:700;color:rgba(255,255,255,.82);margin-top:4px;}
+.usp-ph-closing-msg{font-size:12.5px;color:rgba(255,255,255,.52);line-height:1.75;margin-bottom:10px;}.usp-ph-brand{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}.usp-ph-brand-sub{font-size:10.5px;color:rgba(240,200,122,.6);padding-bottom:18px;}
+.usp-cdots{display:flex;justify-content:center;gap:5px;margin-top:4px;}.usp-cdot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s;}.usp-cdot.active{width:16px;border-radius:2px;background:var(--gold);}
+
+.svc-select{padding:16px 14px 8px;}.svc-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-left:4px;}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.svc-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;cursor:pointer;transition:all .2s;}.svc-card:hover{border-color:var(--navy);}.svc-icon{font-size:32px;margin-bottom:10px;}.svc-name{font-size:14px;font-weight:700;color:var(--navy);}.svc-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+
+.steps{display:flex;align-items:center;padding:7px 18px;background:#fff;border-bottom:1px solid var(--border);}.step-item{display:flex;align-items:center;gap:7px;flex:1;font-size:11.5px;color:var(--hint);font-weight:500;}.step-item.active{color:var(--navy);}.step-item.done{color:var(--gold);}
+.step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint);background:#fff;transition:all .25s;}.step-item.active .step-dot{background:var(--navy);border-color:var(--navy);color:#fff;}.step-item.done .step-dot{background:var(--gold);border-color:var(--gold);color:#fff;}
+.step-line{flex:1;height:1px;background:var(--border);margin:0 4px;}
+
+.card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);margin:8px 14px;overflow:hidden;box-shadow:0 1px 4px rgba(28,43,74,.06);}
+.card-header{padding:12px 18px 10px;border-bottom:1px solid var(--border);background:#fafbfd;}.card-title{font-size:14px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;}.card-badge{font-size:10px;font-weight:600;background:var(--navy-lt);color:var(--navy);padding:2px 8px;border-radius:20px;}.card-sub{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.55;}
+.card-body{padding:12px 18px;}.form-group{margin-bottom:10px;}.form-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:7px;display:block;}
+.form-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:16px;font-family:inherit;color:var(--text);background:#fff;outline:none;-webkit-appearance:none;}.form-input::placeholder{color:var(--hint);}.form-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(28,43,74,.1);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.ssn-wrap{display:flex;align-items:center;gap:10px;}.ssn-wrap .form-input{flex:1;}.ssn-dash{color:var(--hint);font-size:20px;}
+.btn{width:100%;padding:12px;border-radius:10px;border:none;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;}.btn-primary{background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(28,43,74,.25);}.btn-primary:hover{background:#243660;}.btn-primary:disabled{background:var(--border);color:var(--hint);cursor:default;box-shadow:none;}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--muted);margin-top:9px;font-weight:500;}.btn-outline:hover{background:var(--gray);}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;font-size:11.5px;color:var(--hint);}.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.security-note{display:flex;align-items:flex-start;gap:7px;background:var(--navy-lt);border:1px solid #d0d8e8;border-radius:8px;padding:10px 13px;margin-top:14px;font-size:11.5px;color:var(--navy);line-height:1.55;}
+.error-msg{background:#fef0ef;border:1px solid #f5c0bb;border-radius:8px;padding:11px 14px;font-size:13px;color:var(--red);margin-top:12px;display:none;line-height:1.5;}.error-msg.show{display:block;}
+
+.loading-wrap{padding:60px 20px;text-align:center;display:none;}.loading-wrap.show{display:block;}
+.spinner{width:52px;height:52px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px;}@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:16px;color:var(--navy);font-weight:700;}.loading-sub{font-size:12px;color:var(--hint);margin-top:5px;}
+.loading-steps{margin-top:22px;text-align:left;display:inline-block;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;min-width:220px;}
+.ls-item{font-size:13px;color:var(--hint);padding:6px 0;display:flex;align-items:center;gap:10px;}.ls-item.done{color:var(--gold);}.ls-item.active{color:var(--navy);font-weight:600;}
+.ls-icon{width:18px;height:18px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--hint);}.ls-item.done .ls-icon{background:var(--gold);color:#fff;}.ls-item.active .ls-icon{background:var(--navy);color:#fff;}
+
+.complete-wrap{padding:44px 22px 40px;text-align:center;display:none;}.complete-wrap.show{display:block;}
+.complete-emblem{width:80px;height:80px;border-radius:50%;background:var(--gold-lt);border:2px solid var(--gold-bd);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px;}
+.complete-title{font-size:22px;font-weight:800;margin-bottom:8px;color:var(--navy);}.complete-body{font-size:14px;color:var(--muted);line-height:1.85;}
+.complete-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-top:20px;text-align:left;}.complete-card-title{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.complete-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border);}.complete-row:last-child{border-bottom:none;}.cr-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;}.cr-text{color:var(--text);line-height:1.5;}
+
+/* 소득 결과 */
+.ir{padding:8px 14px 20px;display:none;}.ir.show{display:block;}
+.ir-sum{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:12px;}
+.ir-sum-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.ir-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}.ir-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--green-lt);color:var(--green);}
+.ir-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;}
+.ir-card-hdr{background:var(--navy);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;}.ir-card-title{font-size:14px;font-weight:800;color:#fff;}.ir-card-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}.ir-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;background:var(--green);color:#fff;}
+.ir-tbl{width:100%;border-collapse:collapse;}.ir-tbl th{padding:6px 10px;font-size:10px;font-weight:600;background:var(--navy-lt);color:var(--navy);text-align:left;}.ir-tbl th:last-child{text-align:right;}.ir-tbl td{padding:6px 10px;font-size:11px;color:#333;border-bottom:1px solid #f0f0f0;}.ir-tbl td:last-child{text-align:right;font-weight:600;}.ir-tbl tr:nth-child(even){background:#fafafa;}
+.ir-kv{width:100%;border-collapse:collapse;}.ir-kv td{padding:8px 16px;font-size:12px;border-bottom:1px solid #f0f0f0;}.ir-kv .k{color:var(--muted);font-weight:600;background:#fafbfd;width:30%;}.ir-kv .v{color:#333;}.ir-kv .v.bold{font-weight:700;color:var(--navy);font-size:13px;}
+.ir-card-foot{padding:6px 16px;background:#fafbfd;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;}.ir-card-foot span{font-size:9px;color:var(--hint);}
+.ir-pbtn{font-size:11px;font-weight:600;color:var(--navy);background:none;border:1px solid var(--navy);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:inherit;}.ir-pbtn:hover{background:var(--navy);color:#fff;}
+
+.footer{text-align:center;padding:20px 22px 30px;font-size:11px;color:var(--hint);line-height:1.7;margin-top:auto;}
+.hidden{display:none!important;}
+@media print{.header,.trust-bar,.usp,.svc-select,.steps,.footer,.ir-pbtn,.no-print{display:none!important;}body{background:#fff!important;}.app-shell{box-shadow:none!important;width:100%!important;}.ir-card{border:1px solid #ccc!important;margin:0 0 8px!important;page-break-inside:avoid;}body.po .ir-card{display:none!important;}body.po .ir-card.pt{display:block!important;}@page{size:A4;margin:12mm;}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<div class="header">
+  <img class="header-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%231c2b4a'/%3E%3Ctext x='22' y='28' text-anchor='middle' font-size='18' font-weight='800' fill='%23c8851a'%3EE%3C/text%3E%3C/svg%3E" alt="">
+  <div><div class="header-name"><span>엘리트</span>손해사정법인</div><div class="header-sub">Claims Survey &amp; Adjusting</div></div>
+</div>
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div>금융감독원 등록</div>
+  <div class="trust-item"><div class="trust-dot"></div>개인정보 암호화</div>
+  <div class="trust-item"><div class="trust-dot"></div><a href="tel:031-870-8465" style="color:rgba(255,255,255,.5);text-decoration:none;">031-870-8465</a></div>
+</div>
+<div class="usp"><div class="usp-label">엘리트만의 차이</div>
+  <div class="usp-phrase-wrap" onclick="uspNext()">
+    <div class="usp-phrase active" id="uph0"><div class="usp-ph-big">사고도 보험도<br>참 복잡하죠?</div></div>
+    <div class="usp-phrase" id="uph1"><div class="usp-ph-big">사고나서야 아셨을 겁니다.</div><div class="usp-ph-sm">내 보험인데, 나만 모른다는 걸.</div></div>
+    <div class="usp-phrase" id="uph2"><div class="usp-ph-list"><div>뭘 받을 수 있는지</div><div>뭘 받아야만 하는지</div><div>누구 말을 믿어야 하는지</div></div><div class="usp-ph-end">알 길이 없으셨을 겁니다.</div></div>
+    <div class="usp-phrase" id="uph3"><div class="usp-ph-sm" style="margin-bottom:8px;">보상만으론</div><div class="usp-ph-big" style="font-size:19px;">돌아오지 않는 것들이 있습니다.</div></div>
+    <div class="usp-phrase" id="uph4"><div class="usp-ph-closing-msg">저희가 이 일을 가볍게<br>여기지 않는 이유입니다.</div><div class="usp-ph-brand">엘리트손해사정법인</div><div class="usp-ph-brand-sub">타 손해사정사 종결건 · 재검토 이후 추가보상 사례 다수</div></div>
+  </div>
+  <div class="usp-cdots" id="uspCdots"><div class="usp-cdot active"></div><div class="usp-cdot"></div><div class="usp-cdot"></div><div class="usp-cdot"></div><div class="usp-cdot"></div></div>
+</div>
+
+<div id="page-wrap">
+
+<!-- 서비스 선택 -->
+<div class="svc-select" id="svc-select">
+  <div class="svc-title">분석 서비스 선택</div>
+  <div class="svc-grid">
+    <div class="svc-card" onclick="selectSvc('insurance')"><div class="svc-icon">📋</div><div class="svc-name">보험계약 조회</div><div class="svc-desc">내보험다보여(credit4u)<br>가입 보험 전체 분석</div></div>
+    <div class="svc-card" onclick="selectSvc('income')"><div class="svc-icon">💰</div><div class="svc-name">소득정보 조회</div><div class="svc-desc">홈택스 간편인증<br>소득 입증 자료 조회</div></div>
+  </div>
+</div>
+
+<!-- 스텝바 -->
+<div class="steps hidden" id="step-bar">
+  <div class="step-item active" id="s1"><div class="step-dot" id="sd1">1</div><span id="sl1">로그인</span></div><div class="step-line"></div>
+  <div class="step-item" id="s2"><div class="step-dot" id="sd2">2</div><span>분석중</span></div><div class="step-line"></div>
+  <div class="step-item" id="s3"><div class="step-dot" id="sd3">3</div><span>완료</span></div>
+</div>
+
+<!-- 보험 로그인 -->
+<div class="card hidden" id="login-card">
+  <div class="card-header"><div class="card-title">credit4u 로그인 <span class="card-badge">내보험다보여</span></div><div class="card-sub">기존 계정으로 로그인해 주세요</div></div>
+  <div class="card-body">
+    <div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="login-id" placeholder="아이디" autocomplete="off"></div>
+    <div class="form-group" style="margin-bottom:22px;"><label class="form-label">비밀번호</label><input class="form-input" type="password" id="login-pw" placeholder="비밀번호"></div>
+    <button class="btn btn-primary" id="login-btn" onclick="doLogin()">보험 분석 시작하기</button>
+    <div class="error-msg" id="login-err"></div>
+    <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 암호화 전송되며 저장하지 않습니다.</div>
+    <div class="divider">계정이 없으신가요?</div>
+    <button class="btn btn-outline" onclick="showC('register')">신규 회원가입</button>
+    <button class="btn btn-outline" onclick="goBack()" style="margin-top:6px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
+  </div>
+</div>
+
+<!-- 소득 간편인증 -->
+<div class="card hidden" id="income-card">
+  <div class="card-header"><div class="card-title">홈택스 간편인증 <span class="card-badge">소득정보</span></div><div class="card-sub">본인인증 후 소득정보를 자동 조회합니다</div></div>
+  <div class="card-body">
+    <!-- Step A: 정보 입력 -->
+    <div id="inc-a">
+      <div class="form-group"><label class="form-label">이름</label><input class="form-input" type="text" id="inc-name" placeholder="홍길동"></div>
+      <div class="form-group">
+        <label class="form-label">주민등록번호</label>
+        <div class="ssn-wrap">
+          <input class="form-input" type="text" id="inc-ssn1" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('inc-ssn2').focus()">
+          <span class="ssn-dash">-</span>
+          <input class="form-input" type="password" id="inc-ssn2" placeholder="뒤 7자리" maxlength="7" inputmode="numeric">
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">휴대폰번호</label><input class="form-input" type="tel" id="inc-phone" placeholder="01012345678" inputmode="numeric"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">통신사</label>
+          <select class="form-input" id="inc-telco"><option value="S">SKT</option><option value="K">KT</option><option value="L">LG U+</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">간편인증</label>
+          <select class="form-input" id="inc-auth"><option value="kakao">카카오톡</option><option value="pass">PASS</option><option value="toss">토스</option><option value="naver">네이버</option><option value="kb">KB스타뱅킹</option><option value="shinhan">신한인증서</option></select>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="inc-a-btn" onclick="incStart()">간편인증 요청</button>
+      <div class="error-msg" id="inc-a-err"></div>
+      <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 홈택스 인증에만 사용되며 저장하지 않습니다.</div>
+      <div class="divider">홈택스 계정이 없으신가요?</div>
+      <button class="btn btn-outline" onclick="window.open('https://hometax.go.kr','_blank')">홈택스에서 회원가입 →</button>
+      <button class="btn btn-outline" onclick="goBack()" style="margin-top:6px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
+    </div>
+    <!-- Step B: 인증 확인 대기 -->
+    <div id="inc-b" class="hidden">
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">📱</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">휴대폰에서 인증을 확인해 주세요</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">선택하신 <b id="inc-auth-name">카카오톡</b> 앱에서<br>인증 요청을 승인해 주세요.</div>
+      </div>
+      <button class="btn btn-primary" id="inc-b-btn" onclick="incComplete()">인증 완료 · 소득정보 조회</button>
+      <div class="error-msg" id="inc-b-err"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 회원가입 (보험용) -->
+<div class="card hidden" id="register-card">
+  <div class="card-header"><div class="card-title">credit4u 회원가입</div><div class="card-sub">본인인증을 통해 계정을 생성합니다</div></div>
+  <div class="card-body">
+    <div id="reg-a">
+      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="r-name" placeholder="홍길동"></div>
+      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="r-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('r-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="r-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="r-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="r-phone" placeholder="01012345678" inputmode="numeric"></div></div>
+      <button class="btn btn-primary" id="reg-a-btn" onclick="regA()">인증번호 받기</button><div class="error-msg" id="reg-a-err"></div>
+      <button class="btn btn-outline" onclick="showC('login')">← 이미 계정이 있어요</button>
+    </div>
+    <div id="reg-b" class="hidden">
+      <div class="form-group"><label class="form-label">보안 문자</label><div id="captcha-box" style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="captcha-img-el" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
+      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="r-captcha" placeholder="숫자" inputmode="numeric"></div>
+      <button class="btn btn-primary" id="reg-b-btn" onclick="regB()">확인</button><div class="error-msg" id="reg-b-err"></div>
+    </div>
+    <div id="reg-c" class="hidden">
+      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="r-sms" placeholder="6자리" inputmode="numeric"></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="r-id" placeholder="아이디"></div><div class="form-group"><label class="form-label">비밀번호</label><input class="form-input" type="password" id="r-pw" placeholder="비밀번호"></div></div>
+      <div class="form-group"><label class="form-label">이메일</label><input class="form-input" type="email" id="r-email" placeholder="email@example.com"></div>
+      <button class="btn btn-primary" id="reg-c-btn" onclick="regC()">가입 완료</button><div class="error-msg" id="reg-c-err"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 로딩 (보험) -->
+<div class="loading-wrap" id="loading"><div class="spinner"></div><div class="loading-text">보험계약 분석 중</div><div class="loading-sub">잠시만 기다려 주세요</div><div class="loading-steps"><div class="ls-item" id="ls1"><div class="ls-icon">1</div>정액형 보장계약 조회</div><div class="ls-item" id="ls2"><div class="ls-icon">2</div>실손형 보장계약 조회</div><div class="ls-item" id="ls3"><div class="ls-icon">3</div>자동차보험 조회</div><div class="ls-item" id="ls4"><div class="ls-icon">4</div>분석 완료</div></div></div>
+
+<!-- 로딩 (소득) -->
+<div class="loading-wrap" id="inc-loading"><div class="spinner"></div><div class="loading-text">소득정보 조회 중</div><div class="loading-sub">홈택스 데이터를 가져오고 있습니다</div><div class="loading-steps"><div class="ls-item" id="ils1"><div class="ls-icon">1</div>소득금액증명 조회</div><div class="ls-item" id="ils2"><div class="ls-icon">2</div>소득내역 상세 조회</div><div class="ls-item" id="ils3"><div class="ls-icon">3</div>데이터 분석</div><div class="ls-item" id="ils4"><div class="ls-icon">4</div>완료</div></div></div>
+
+<!-- 완료 (보험) -->
+<div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div></div>
+
+<!-- 소득 결과 -->
+<div class="ir" id="ir"><div class="ir-sum" id="ir-sum"></div><div id="ir-cards"></div>
+  <button class="btn btn-primary no-print" style="margin-top:8px;" onclick="printAllIR()">🖨 전체 인쇄</button>
+  <div class="complete-card" style="margin-top:16px;"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 담당자가 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">소득 입증 자료 기반 일실수입 산정</div></div></div>
+</div>
+
+</div><!-- page-wrap -->
+</div><!-- app-shell -->
+
+<script>
+var GAS_URL="https://script.google.com/macros/s/AKfycbx9ts__5bnQQGNdjR1kjAnOnId5-x6NRZZ9kXjXqsv_aKJpb_0YXfZGcs76jYkq5w3i/exec";
+var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
+var curSvc='',incState={};
+var regState={userName:'',birth:'',ssnBack:'',mobileCo:'SKT',authType:'mobile',mobileNo:'',step_data:'',proxy:'',userId:'',userPw:'',email:''};
+
+async function callGAS(action,params){var body=Object.assign({action:action},params);var res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(body)});var data=await res.json();if(!data.success&&data.message)throw new Error(data.message);return data;}
+
+function showC(v){['login-card','register-card','income-card'].forEach(function(id){document.getElementById(id).classList.add('hidden');});if(v)document.getElementById(v+'-card').classList.remove('hidden');}
+function setStep(n){for(var i=1;i<=3;i++){var si=document.getElementById('s'+i),d=document.getElementById('sd'+i);si.classList.remove('active','done');if(i<n){si.classList.add('done');d.textContent='✓';}else if(i===n){si.classList.add('active');d.textContent=i;}else d.textContent=i;}}
+function showErr(id,msg){var el=document.getElementById(id);el.textContent=msg;el.classList.add('show');}
+function clearErr(id){document.getElementById(id).classList.remove('show');}
+function btnLoad(id,on,txt){var b=document.getElementById(id);b.disabled=on;if(on)b.textContent='처리 중...';else if(txt)b.textContent=txt;}
+
+function selectSvc(svc){
+  curSvc=svc;
+  document.getElementById('svc-select').classList.add('hidden');
+  document.getElementById('step-bar').classList.remove('hidden');
+  document.getElementById('sl1').textContent=svc==='income'?'인증':'로그인';
+  setStep(1);
+  showC(svc==='income'?'income':'login');
+}
+function goBack(){curSvc='';['login-card','income-card','register-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
+
+/* ═══ 보험 ═══ */
+async function doLogin(){clearErr('login-err');var uid=document.getElementById('login-id').value.trim(),pw=document.getElementById('login-pw').value;if(!uid||!pw){showErr('login-err','아이디/비밀번호를 입력해 주세요.');return;}btnLoad('login-btn',true);showC(null);await runInsurance(uid,pw);}
+async function runInsurance(uid,pw){setStep(2);document.getElementById('loading').classList.add('show');var steps=['ls1','ls2','ls3','ls4'],idx=0;var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},700);try{await callGAS('analyze',{userId:uid,userPw:pw,staff_email:STAFF_EMAIL});clearInterval(iv);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('loading').classList.remove('show');setStep(3);document.getElementById('complete').classList.add('show');},800);}catch(e){clearInterval(iv);document.getElementById('loading').classList.remove('show');showC('login');showErr('login-err',e.message);setStep(1);btnLoad('login-btn',false,'보험 분석 시작하기');}}
+
+/* ═══ 소득 — Step 1: init ═══ */
+async function incStart(){
+  clearErr('inc-a-err');
+  var name=document.getElementById('inc-name').value.trim();
+  var ssn1=document.getElementById('inc-ssn1').value.trim();
+  var ssn2=document.getElementById('inc-ssn2').value.trim();
+  var phone=document.getElementById('inc-phone').value.trim();
+  var telco=document.getElementById('inc-telco').value;
+  var auth=document.getElementById('inc-auth').value;
+  if(!name||!ssn1||!ssn2||!phone){showErr('inc-a-err','모든 항목을 입력해 주세요.');return;}
+  if(ssn1.length!==6||ssn2.length!==7){showErr('inc-a-err','주민번호를 정확히 입력해 주세요.');return;}
+
+  var century=parseInt(ssn2[0])<=2?'19':'20';
+  var resNo=century+ssn1;
+  var bizNo=ssn1+ssn2;
+
+  incState={resNm:name,resNo:resNo,mobileNo:phone,mobileCo:telco,loginOrgCd:auth,bizNo:bizNo,staff_email:STAFF_EMAIL};
+
+  var authNames={kakao:'카카오톡',pass:'PASS',toss:'토스',naver:'네이버',kb:'KB스타뱅킹',shinhan:'신한인증서'};
+  document.getElementById('inc-auth-name').textContent=authNames[auth]||auth;
+
+  btnLoad('inc-a-btn',true);
+  try{
+    var data=await callGAS('income_init',incState);
+    incState.stepData=data.stepData;
+    document.getElementById('inc-a').classList.add('hidden');
+    document.getElementById('inc-b').classList.remove('hidden');
+  }catch(e){showErr('inc-a-err',e.message);}
+  finally{btnLoad('inc-a-btn',false,'간편인증 요청');}
+}
+
+/* ═══ 소득 — Step 2: complete ═══ */
+async function incComplete(){
+  clearErr('inc-b-err');
+  btnLoad('inc-b-btn',true);
+  document.getElementById('income-card').classList.add('hidden');
+
+  setStep(2);
+  document.getElementById('inc-loading').classList.add('show');
+  var steps=['ils1','ils2','ils3','ils4'],idx=0;
+  var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},900);
+
+  try{
+    var data=await callGAS('income_complete',incState);
+    clearInterval(iv);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});
+    setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);renderIR(data);},800);
+  }catch(e){
+    clearInterval(iv);document.getElementById('inc-loading').classList.remove('show');
+    document.getElementById('income-card').classList.remove('hidden');
+    document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');
+    showErr('inc-a-err',e.message);setStep(1);btnLoad('inc-b-btn',false,'인증 완료 · 소득정보 조회');
+  }
+}
+
+/* ═══ 소득 결과 렌더링 ═══ */
+function renderIR(data){
+  var types=data.detected_types||[];
+  var total=(data.income_proof||[]).length+(data.salary_list||[]).length+(data.business_list||[]).length+(data.daily_list||[]).length+(data.taxdoc_list||[]).length;
+  var sh='<div class="ir-sum-title">💰 소득정보 분석 완료</div><div style="font-size:12px;color:var(--muted);">'+E(data.cert_name||'')+' · '+total+'건 · '+E(data.query_years||'')+'</div>';
+  if(types.length>0){sh+='<div class="ir-tags">';types.forEach(function(t){sh+='<span class="ir-tag">'+E(t)+'</span>';});sh+='</div>';}
+  document.getElementById('ir-sum').innerHTML=sh;
+
+  var ch='',ci=0;
+  (data.income_proof||[]).forEach(function(item){ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">소득금액증명</div><div class="ir-card-sub">홈택스 · '+E(item.mateKndNm)+'</div></div><span class="ir-badge">'+E(item.attrYr)+'</span></div><div style="padding:0;"><table class="ir-kv"><tr><td class="k">귀속연도</td><td class="v">'+E(item.attrYr)+'</td></tr><tr><td class="k">총소득금액</td><td class="v bold">'+A(item.totaSnwAmt)+'</td></tr><tr><td class="k">결정세액</td><td class="v">'+A(item.totaDcsTxamt)+'</td></tr><tr><td class="k">근로소득</td><td class="v">'+A(item.lbrIncAmt)+'</td></tr><tr><td class="k">사업소득</td><td class="v">'+A(item.bsIncAmt)+'</td></tr></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;});
+
+  if((data.salary_list||[]).length>0){var rows=data.salary_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnTmop)+'</td><td>'+E(r.dtyTerm)+'</td><td>'+E(r.pperNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">근로소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.salary_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>근무기간</th><th>사업장</th><th>급여</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
+
+  if((data.business_list||[]).length>0){var rows2=data.business_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnTmop)+'</td><td>'+E(r.pperNm)+'</td><td>'+E(r.bsicTfbNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">사업소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.business_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>사업장</th><th>업종</th><th>지급액</th></tr></thead><tbody>'+rows2+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
+
+  if((data.daily_list||[]).length>0){var rows3=data.daily_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnMm)+'</td><td>'+E(r.pperNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">일용근로소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.daily_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>사업장</th><th>지급액</th></tr></thead><tbody>'+rows3+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
+
+  if((data.taxdoc_list||[]).length>0){var rows4=data.taxdoc_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pperNm)+'</td><td>'+E(r.servClNm)+'</td><td>'+A(r.servOfrRmntTotaAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">과세자료 제출명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.taxdoc_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>사업장</th><th>용역구분</th><th>대가</th></tr></thead><tbody>'+rows4+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
+
+  document.getElementById('ir-cards').innerHTML=ch;
+  document.getElementById('ir').classList.add('show');
+}
+
+function E(s){if(!s||s==='-')return'-';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function A(a){if(!a||a==='-'||a==='0')return'-';var n=parseInt(String(a).replace(/[^0-9]/g,''));return isNaN(n)||n===0?'-':n.toLocaleString()+'원';}
+function printAllIR(){document.body.classList.remove('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});window.print();}
+function printIR(i){document.body.classList.add('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});var t=document.querySelector('.ir-card[data-ci="'+i+'"]');if(t)t.classList.add('pt');window.print();document.body.classList.remove('po');}
+
+/* ═══ 회원가입 (기존) ═══ */
+async function regA(){clearErr('reg-a-err');var name=document.getElementById('r-name').value.trim(),phone=document.getElementById('r-phone').value.trim(),telco=document.getElementById('r-telco').value,f=document.getElementById('r-ssn-front').value.trim(),b=document.getElementById('r-ssn-back').value.trim();if(!name||!f||!b||!phone){showErr('reg-a-err','모든 항목을 입력해 주세요.');return;}var yp=parseInt(b[0])<=2?'19':'20';Object.assign(regState,{userName:name,birth:yp+f,ssnBack:b,mobileCo:telco,mobileNo:phone});btnLoad('reg-a-btn',true);try{var data=await callGAS('register_init',regState);regState.step_data=data.step_data;regState.proxy=data.proxy;if(data.captcha_img){var img=document.getElementById('captcha-img-el');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('captcha-loading').classList.add('hidden');}document.getElementById('reg-a').classList.add('hidden');document.getElementById('reg-b').classList.remove('hidden');}catch(e){showErr('reg-a-err',e.message);}finally{btnLoad('reg-a-btn',false,'인증번호 받기');}}
+async function regB(){clearErr('reg-b-err');var c=document.getElementById('r-captcha').value.trim();if(!c){showErr('reg-b-err','보안 문자 입력');return;}btnLoad('reg-b-btn',true);try{var data=await callGAS('register_captcha',Object.assign({},regState,{captcha_input:c}));regState.step_data=data.step_data;regState.proxy=data.proxy;document.getElementById('reg-b').classList.add('hidden');document.getElementById('reg-c').classList.remove('hidden');}catch(e){showErr('reg-b-err',e.message);}finally{btnLoad('reg-b-btn',false,'확인');}}
+async function regC(){clearErr('reg-c-err');var sms=document.getElementById('r-sms').value.trim(),id=document.getElementById('r-id').value.trim(),pw=document.getElementById('r-pw').value,em=document.getElementById('r-email').value.trim();if(!sms||!id||!pw||!em){showErr('reg-c-err','모든 항목 입력');return;}Object.assign(regState,{userId:id,userPw:pw,email:em});btnLoad('reg-c-btn',true);try{var sd=await callGAS('register_sms',Object.assign({},regState,{sms_input:sms}));regState.step_data=sd.step_data;regState.proxy=sd.proxy;var ec=prompt('이메일 인증번호:');if(!ec){showErr('reg-c-err','이메일 인증번호 필요');return;}await callGAS('register_email',Object.assign({},regState,{email_input:ec}));showC(null);await runInsurance(regState.userId,regState.userPw);}catch(e){showErr('reg-c-err',e.message);}finally{btnLoad('reg-c-btn',false,'가입 완료');}}
+
+/* USP */
+(function(){var P=document.querySelectorAll('.usp-phrase'),D=document.querySelectorAll('.usp-cdot'),DU=[4500,4500,6000,4500,6500],c=0,t=P.length,r,st;function sh(i){P.forEach(function(el,j){el.classList.toggle('active',j===i);});D.forEach(function(el,j){el.classList.toggle('active',j===i);});c=i;ap(DU[i]);}function ap(d){cancelAnimationFrame(r);st=performance.now();function tk(n){if((n-st)/d<1)r=requestAnimationFrame(tk);else sh((c+1)%t);}r=requestAnimationFrame(tk);}window.uspNext=function(){cancelAnimationFrame(r);sh((c+1)%t);};D.forEach(function(d,i){d.addEventListener('click',function(e){e.stopPropagation();cancelAnimationFrame(r);sh(i);});});sh(0);})();
+</script>
+</body>
+</html>
