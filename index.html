@@ -58,21 +58,9 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 .complete-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-top:20px;text-align:left;}.complete-card-title{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
 .complete-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border);}.complete-row:last-child{border-bottom:none;}.cr-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;}.cr-text{color:var(--text);line-height:1.5;}
 
-/* 소득 결과 */
-.ir{padding:8px 14px 20px;display:none;}.ir.show{display:block;}
-.ir-sum{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:12px;}
-.ir-sum-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;}
-.ir-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}.ir-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--green-lt);color:var(--green);}
-.ir-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;}
-.ir-card-hdr{background:var(--navy);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;}.ir-card-title{font-size:14px;font-weight:800;color:#fff;}.ir-card-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}.ir-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;background:var(--green);color:#fff;}
-.ir-tbl{width:100%;border-collapse:collapse;}.ir-tbl th{padding:6px 10px;font-size:10px;font-weight:600;background:var(--navy-lt);color:var(--navy);text-align:left;}.ir-tbl th:last-child{text-align:right;}.ir-tbl td{padding:6px 10px;font-size:11px;color:#333;border-bottom:1px solid #f0f0f0;}.ir-tbl td:last-child{text-align:right;font-weight:600;}.ir-tbl tr:nth-child(even){background:#fafafa;}
-.ir-kv{width:100%;border-collapse:collapse;}.ir-kv td{padding:8px 16px;font-size:12px;border-bottom:1px solid #f0f0f0;}.ir-kv .k{color:var(--muted);font-weight:600;background:#fafbfd;width:30%;}.ir-kv .v{color:#333;}.ir-kv .v.bold{font-weight:700;color:var(--navy);font-size:13px;}
-.ir-card-foot{padding:6px 16px;background:#fafbfd;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;}.ir-card-foot span{font-size:9px;color:var(--hint);}
-.ir-pbtn{font-size:11px;font-weight:600;color:var(--navy);background:none;border:1px solid var(--navy);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:inherit;}.ir-pbtn:hover{background:var(--navy);color:#fff;}
-
 .footer{text-align:center;padding:20px 22px 30px;font-size:11px;color:var(--hint);line-height:1.7;margin-top:auto;}
 .hidden{display:none!important;}
-@media print{.header,.trust-bar,.usp,.svc-select,.steps,.footer,.ir-pbtn,.no-print{display:none!important;}body{background:#fff!important;}.app-shell{box-shadow:none!important;width:100%!important;}.ir-card{border:1px solid #ccc!important;margin:0 0 8px!important;page-break-inside:avoid;}body.po .ir-card{display:none!important;}body.po .ir-card.pt{display:block!important;}@page{size:A4;margin:12mm;}}
+@media print{.header,.trust-bar,.usp,.svc-select,.steps,.footer,.no-print{display:none!important;}body{background:#fff!important;}.app-shell{box-shadow:none!important;width:100%!important;}@page{size:A4;margin:12mm;}}
 </style>
 </head>
 <body>
@@ -206,11 +194,8 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 <!-- 완료 (보험) -->
 <div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div></div>
 
-<!-- 소득 결과 -->
-<div class="ir" id="ir"><div class="ir-sum" id="ir-sum"></div><div id="ir-cards"></div>
-  <button class="btn btn-primary no-print" style="margin-top:8px;" onclick="printAllIR()">🖨 전체 인쇄</button>
-  <div class="complete-card" style="margin-top:16px;"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 담당자가 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">소득 입증 자료 기반 일실수입 산정</div></div></div>
-</div>
+<!-- 완료 (소득) -->
+<div class="complete-wrap" id="inc-complete"><div class="complete-emblem">💰</div><div class="complete-title">소득정보 분석 완료!</div><div class="complete-body">소득정보 조회 및 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div></div></div>
 
 </div><!-- page-wrap -->
 </div><!-- app-shell -->
@@ -290,7 +275,7 @@ async function incComplete(){
   try{
     var data=await callGAS('income_complete',incState);
     clearInterval(iv);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});
-    setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);renderIR(data);},800);
+    setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);showIncComplete();},800);
   }catch(e){
     clearInterval(iv);document.getElementById('inc-loading').classList.remove('show');
     document.getElementById('income-card').classList.remove('hidden');
@@ -299,37 +284,8 @@ async function incComplete(){
   }
 }
 
-/* ═══ 소득 결과 렌더링 ═══ */
-var _irPdfB64='';
-function renderIR(data){
-  _irPdfB64=data.pdf_base64||'';
-  var types=data.detected_types||[];
-  var total=(data.income_proof||[]).length+(data.salary_list||[]).length+(data.business_list||[]).length+(data.daily_list||[]).length+(data.taxdoc_list||[]).length;
-  var sh='<div class="ir-sum-title">💰 소득정보 분석 완료</div><div style="font-size:12px;color:var(--muted);">'+E(data.cert_name||'')+' · '+total+'건 · '+E(data.query_years||'')+'</div>';
-  if(types.length>0){sh+='<div class="ir-tags">';types.forEach(function(t){sh+='<span class="ir-tag">'+E(t)+'</span>';});sh+='</div>';}
-  if(_irPdfB64){sh+='<div style="margin-top:12px;"><button class="btn btn-primary no-print" style="background:var(--green);font-size:13px;padding:10px;" onclick="openPdf()">📄 소득금액증명원 원본 PDF 보기</button><div style="font-size:10px;color:var(--hint);margin-top:4px;">홈택스 공식 발급 문서</div></div>';}
-  document.getElementById('ir-sum').innerHTML=sh;
-
-  var ch='',ci=0;
-  (data.income_proof||[]).forEach(function(item){ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">소득금액증명</div><div class="ir-card-sub">홈택스 · '+E(item.mateKndNm)+'</div></div><span class="ir-badge">'+E(item.attrYr)+'</span></div><div style="padding:0;"><table class="ir-kv"><tr><td class="k">귀속연도</td><td class="v">'+E(item.attrYr)+'</td></tr><tr><td class="k">총소득금액</td><td class="v bold">'+A(item.totaSnwAmt)+'</td></tr><tr><td class="k">결정세액</td><td class="v">'+A(item.totaDcsTxamt)+'</td></tr><tr><td class="k">근로소득</td><td class="v">'+A(item.lbrIncAmt)+'</td></tr><tr><td class="k">사업소득</td><td class="v">'+A(item.bsIncAmt)+'</td></tr></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;});
-
-  if((data.salary_list||[]).length>0){var rows=data.salary_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnTmop)+'</td><td>'+E(r.dtyTerm)+'</td><td>'+E(r.pperNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">근로소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.salary_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>근무기간</th><th>사업장</th><th>급여</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
-
-  if((data.business_list||[]).length>0){var rows2=data.business_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnTmop)+'</td><td>'+E(r.pperNm)+'</td><td>'+E(r.bsicTfbNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">사업소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.business_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>사업장</th><th>업종</th><th>지급액</th></tr></thead><tbody>'+rows2+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
-
-  if((data.daily_list||[]).length>0){var rows3=data.daily_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pymnMm)+'</td><td>'+E(r.pperNm)+'</td><td>'+A(r.totaPymnAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">일용근로소득 지급명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.daily_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>지급월</th><th>사업장</th><th>지급액</th></tr></thead><tbody>'+rows3+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
-
-  if((data.taxdoc_list||[]).length>0){var rows4=data.taxdoc_list.map(function(r){return'<tr><td>'+E(r.rowNum)+'</td><td>'+E(r.attrYr)+'</td><td>'+E(r.pperNm)+'</td><td>'+E(r.servClNm)+'</td><td>'+A(r.servOfrRmntTotaAmt)+'</td></tr>';}).join('');ch+='<div class="ir-card" data-ci="'+ci+'"><div class="ir-card-hdr"><div><div class="ir-card-title">과세자료 제출명세서</div><div class="ir-card-sub">홈택스</div></div><span class="ir-badge">'+data.taxdoc_list.length+'건</span></div><div style="padding:0;overflow-x:auto;"><table class="ir-tbl"><thead><tr><th>No</th><th>귀속</th><th>사업장</th><th>용역구분</th><th>대가</th></tr></thead><tbody>'+rows4+'</tbody></table></div><div class="ir-card-foot"><span>엘리트손해사정법인</span><button class="ir-pbtn" onclick="printIR('+ci+')">🖨 인쇄</button></div></div>';ci++;}
-
-  document.getElementById('ir-cards').innerHTML=ch;
-  document.getElementById('ir').classList.add('show');
-}
-
-function E(s){if(!s||s==='-')return'-';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function A(a){if(!a||a==='-'||a==='0')return'-';var n=parseInt(String(a).replace(/[^0-9]/g,''));return isNaN(n)||n===0?'-':n.toLocaleString()+'원';}
-function printAllIR(){document.body.classList.remove('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});window.print();}
-function printIR(i){document.body.classList.add('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});var t=document.querySelector('.ir-card[data-ci="'+i+'"]');if(t)t.classList.add('pt');window.print();document.body.classList.remove('po');}
-function openPdf(){if(!_irPdfB64){alert('PDF 데이터가 없습니다.');return;}try{var bin=atob(_irPdfB64);var bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);var blob=new Blob([bytes],{type:'application/pdf'});var url=URL.createObjectURL(blob);window.open(url,'_blank');}catch(e){alert('PDF 열기 실패: '+e.message);}}
+/* ═══ 소득 완료 화면 ═══ */
+function showIncComplete(){document.getElementById('inc-complete').classList.add('show');}
 
 /* ═══ 회원가입 (기존) ═══ */
 async function regA(){clearErr('reg-a-err');var name=document.getElementById('r-name').value.trim(),phone=document.getElementById('r-phone').value.trim(),telco=document.getElementById('r-telco').value,f=document.getElementById('r-ssn-front').value.trim(),b=document.getElementById('r-ssn-back').value.trim();if(!name||!f||!b||!phone){showErr('reg-a-err','모든 항목을 입력해 주세요.');return;}var yp=parseInt(b[0])<=2?'19':'20';Object.assign(regState,{userName:name,birth:yp+f,ssnBack:b,mobileCo:telco,mobileNo:phone});btnLoad('reg-a-btn',true);try{var data=await callGAS('register_init',regState);regState.step_data=data.step_data;regState.proxy=data.proxy;if(data.captcha_img){var img=document.getElementById('captcha-img-el');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('captcha-loading').classList.add('hidden');}document.getElementById('reg-a').classList.add('hidden');document.getElementById('reg-b').classList.remove('hidden');}catch(e){showErr('reg-a-err',e.message);}finally{btnLoad('reg-a-btn',false,'인증번호 받기');}}
