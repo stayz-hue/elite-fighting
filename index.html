@@ -300,11 +300,14 @@ async function incComplete(){
 }
 
 /* ═══ 소득 결과 렌더링 ═══ */
+var _irPdfB64='';
 function renderIR(data){
+  _irPdfB64=data.pdf_base64||'';
   var types=data.detected_types||[];
   var total=(data.income_proof||[]).length+(data.salary_list||[]).length+(data.business_list||[]).length+(data.daily_list||[]).length+(data.taxdoc_list||[]).length;
   var sh='<div class="ir-sum-title">💰 소득정보 분석 완료</div><div style="font-size:12px;color:var(--muted);">'+E(data.cert_name||'')+' · '+total+'건 · '+E(data.query_years||'')+'</div>';
   if(types.length>0){sh+='<div class="ir-tags">';types.forEach(function(t){sh+='<span class="ir-tag">'+E(t)+'</span>';});sh+='</div>';}
+  if(_irPdfB64){sh+='<div style="margin-top:12px;"><button class="btn btn-primary no-print" style="background:var(--green);font-size:13px;padding:10px;" onclick="openPdf()">📄 소득금액증명원 원본 PDF 보기</button><div style="font-size:10px;color:var(--hint);margin-top:4px;">홈택스 공식 발급 문서</div></div>';}
   document.getElementById('ir-sum').innerHTML=sh;
 
   var ch='',ci=0;
@@ -326,6 +329,7 @@ function E(s){if(!s||s==='-')return'-';return String(s).replace(/&/g,'&amp;').re
 function A(a){if(!a||a==='-'||a==='0')return'-';var n=parseInt(String(a).replace(/[^0-9]/g,''));return isNaN(n)||n===0?'-':n.toLocaleString()+'원';}
 function printAllIR(){document.body.classList.remove('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});window.print();}
 function printIR(i){document.body.classList.add('po');document.querySelectorAll('.ir-card').forEach(function(c){c.classList.remove('pt');});var t=document.querySelector('.ir-card[data-ci="'+i+'"]');if(t)t.classList.add('pt');window.print();document.body.classList.remove('po');}
+function openPdf(){if(!_irPdfB64){alert('PDF 데이터가 없습니다.');return;}try{var bin=atob(_irPdfB64);var bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);var blob=new Blob([bytes],{type:'application/pdf'});var url=URL.createObjectURL(blob);window.open(url,'_blank');}catch(e){alert('PDF 열기 실패: '+e.message);}}
 
 /* ═══ 회원가입 (기존) ═══ */
 async function regA(){clearErr('reg-a-err');var name=document.getElementById('r-name').value.trim(),phone=document.getElementById('r-phone').value.trim(),telco=document.getElementById('r-telco').value,f=document.getElementById('r-ssn-front').value.trim(),b=document.getElementById('r-ssn-back').value.trim();if(!name||!f||!b||!phone){showErr('reg-a-err','모든 항목을 입력해 주세요.');return;}var yp=parseInt(b[0])<=2?'19':'20';Object.assign(regState,{userName:name,birth:yp+f,ssnBack:b,mobileCo:telco,mobileNo:phone});btnLoad('reg-a-btn',true);try{var data=await callGAS('register_init',regState);regState.step_data=data.step_data;regState.proxy=data.proxy;if(data.captcha_img){var img=document.getElementById('captcha-img-el');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('captcha-loading').classList.add('hidden');}document.getElementById('reg-a').classList.add('hidden');document.getElementById('reg-b').classList.remove('hidden');}catch(e){showErr('reg-a-err',e.message);}finally{btnLoad('reg-a-btn',false,'인증번호 받기');}}
