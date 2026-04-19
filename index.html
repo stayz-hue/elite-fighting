@@ -469,6 +469,7 @@ async function fpwC(){
   btnLoad('fpw-c-btn',true);
   try{
     var data=await callGAS('find_pw_sms',Object.assign({},fpwState,{step_input:s,sendMethod:'mobile'}));
+    alert('common:\n'+JSON.stringify(data.common,null,2));
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     document.getElementById('fpw-c').classList.add('hidden');
     document.getElementById('fpw-d').classList.remove('hidden');
