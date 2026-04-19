@@ -397,6 +397,7 @@ async function fidB(){
   btnLoad('fid-b-btn',true);
   try{
     var data=await callGAS('find_id_captcha',Object.assign({},fidState,{step_input:c}));
+    alert('[디버그] 아이디찾기 captcha 응답:\n'+JSON.stringify(data,null,2));
     fidState.step_data=data.step_data;fidState.proxy=data.proxy;
     document.getElementById('fid-b').classList.add('hidden');
     document.getElementById('fid-c').classList.remove('hidden');
@@ -444,6 +445,7 @@ async function fpwB(){
   btnLoad('fpw-b-btn',true);
   try{
     var data=await callGAS('find_pw_captcha',Object.assign({},fpwState,{step_input:c}));
+    alert('[디버그] 비번찾기 captcha 응답:\n'+JSON.stringify(data,null,2));
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     document.getElementById('fpw-b').classList.add('hidden');
     document.getElementById('fpw-c').classList.remove('hidden');
