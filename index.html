@@ -111,7 +111,12 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
     <div class="form-group" style="margin-bottom:22px;"><label class="form-label">비밀번호</label><input class="form-input" type="password" id="login-pw" placeholder="비밀번호"></div>
     <button class="btn btn-primary" id="login-btn" onclick="doLogin()">보험 분석 시작하기</button>
     <div class="error-msg" id="login-err"></div>
-    <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 암호화 전송되며 저장하지 않습니다.</div>
+<div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 암호화 전송되며 저장하지 않습니다.</div>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:12.5px;">
+      <a href="#" onclick="showC('find-id');return false;" style="color:var(--muted);text-decoration:none;">아이디 찾기</a>
+      <span style="color:var(--border);">|</span>
+      <a href="#" onclick="showC('find-pw');return false;" style="color:var(--muted);text-decoration:none;">비밀번호 찾기</a>
+    </div>
     <div class="divider">계정이 없으신가요?</div>
     <button class="btn btn-outline" onclick="showC('register')">신규 회원가입</button>
     <button class="btn btn-outline" onclick="goBack()" style="margin-top:6px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
@@ -185,6 +190,79 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
   </div>
 </div>
 
+<!-- 아이디 찾기 -->
+<div class="card hidden" id="find-id-card">
+  <div class="card-header"><div class="card-title">아이디 찾기 <span class="card-badge">credit4u</span></div><div class="card-sub">본인인증 후 아이디를 알려드립니다</div></div>
+  <div class="card-body">
+    <div id="fid-a">
+      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="fid-name" placeholder="홍길동"></div>
+      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="fid-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('fid-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="fid-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="fid-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="fid-phone" placeholder="01012345678" inputmode="numeric"></div></div>
+      <button class="btn btn-primary" id="fid-a-btn" onclick="fidA()">인증번호 받기</button>
+      <div class="error-msg" id="fid-a-err"></div>
+      <button class="btn btn-outline" onclick="showC('login')" style="margin-top:10px;">← 로그인으로</button>
+    </div>
+    <div id="fid-b" class="hidden">
+      <div class="form-group"><label class="form-label">보안 문자</label><div style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="fid-captcha-img" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="fid-captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
+      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="fid-captcha-input" placeholder="숫자" inputmode="numeric"></div>
+      <button class="btn btn-primary" id="fid-b-btn" onclick="fidB()">확인</button>
+      <div class="error-msg" id="fid-b-err"></div>
+    </div>
+    <div id="fid-c" class="hidden">
+      <div style="text-align:center;padding:10px 0 20px;"><div style="font-size:40px;margin-bottom:10px;">📱</div><div style="font-size:14px;color:var(--muted);line-height:1.6;">휴대폰으로 전송된<br>인증번호를 입력해 주세요.</div></div>
+      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="fid-sms" placeholder="6자리" inputmode="numeric"></div>
+      <button class="btn btn-primary" id="fid-c-btn" onclick="fidC()">아이디 찾기</button>
+      <div class="error-msg" id="fid-c-err"></div>
+    </div>
+    <div id="fid-d" class="hidden">
+      <div class="complete-emblem" style="margin:20px auto;">✓</div>
+      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:14px;color:var(--muted);margin-bottom:10px;">고객님의 아이디는</div><div id="fid-result" style="font-size:20px;font-weight:800;color:var(--navy);padding:10px 20px;background:var(--gold-lt);border-radius:10px;display:inline-block;"></div><div style="font-size:13px;color:var(--muted);margin-top:12px;">입니다.</div></div>
+      <button class="btn btn-primary" onclick="showC('login')">로그인 화면으로</button>
+    </div>
+  </div>
+</div>
+
+<!-- 비밀번호 찾기 -->
+<div class="card hidden" id="find-pw-card">
+  <div class="card-header"><div class="card-title">비밀번호 찾기 <span class="card-badge">credit4u</span></div><div class="card-sub">본인인증 후 비밀번호를 재설정합니다</div></div>
+  <div class="card-body">
+    <div id="fpw-a">
+      <div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="fpw-id" placeholder="아이디"></div>
+      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="fpw-name" placeholder="홍길동"></div>
+      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="fpw-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('fpw-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="fpw-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="fpw-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="fpw-phone" placeholder="01012345678" inputmode="numeric"></div></div>
+      <button class="btn btn-primary" id="fpw-a-btn" onclick="fpwA()">인증번호 받기</button>
+      <div class="error-msg" id="fpw-a-err"></div>
+      <button class="btn btn-outline" onclick="showC('login')" style="margin-top:10px;">← 로그인으로</button>
+    </div>
+    <div id="fpw-b" class="hidden">
+      <div class="form-group"><label class="form-label">보안 문자</label><div style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="fpw-captcha-img" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="fpw-captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
+      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="fpw-captcha-input" placeholder="숫자" inputmode="numeric"></div>
+      <button class="btn btn-primary" id="fpw-b-btn" onclick="fpwB()">확인</button>
+      <div class="error-msg" id="fpw-b-err"></div>
+    </div>
+    <div id="fpw-c" class="hidden">
+      <div style="text-align:center;padding:10px 0 20px;"><div style="font-size:40px;margin-bottom:10px;">📱</div><div style="font-size:14px;color:var(--muted);line-height:1.6;">휴대폰으로 전송된<br>인증번호를 입력해 주세요.</div></div>
+      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="fpw-sms" placeholder="6자리" inputmode="numeric"></div>
+      <button class="btn btn-primary" id="fpw-c-btn" onclick="fpwC()">임시 비밀번호 받기</button>
+      <div class="error-msg" id="fpw-c-err"></div>
+    </div>
+    <div id="fpw-d" class="hidden">
+      <div style="text-align:center;padding:10px 0 14px;"><div style="font-size:14px;color:var(--navy);font-weight:700;margin-bottom:6px;">임시 비밀번호가 휴대폰으로 발송됐습니다</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">받으신 임시 비밀번호와<br>새로 사용할 비밀번호를 입력해 주세요.</div></div>
+      <div class="form-group"><label class="form-label">임시 비밀번호 (SMS 수신)</label><input class="form-input" type="text" id="fpw-tmp" placeholder="임시 비밀번호"></div>
+      <div class="form-group"><label class="form-label">새 비밀번호</label><input class="form-input" type="password" id="fpw-new" placeholder="8자 이상"></div>
+      <div class="form-group"><label class="form-label">새 비밀번호 확인</label><input class="form-input" type="password" id="fpw-new2" placeholder="새 비밀번호 확인"></div>
+      <button class="btn btn-primary" id="fpw-d-btn" onclick="fpwD()">비밀번호 변경</button>
+      <div class="error-msg" id="fpw-d-err"></div>
+    </div>
+    <div id="fpw-e" class="hidden">
+      <div class="complete-emblem" style="margin:20px auto;">✓</div>
+      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:8px;">비밀번호 변경 완료</div><div style="font-size:13px;color:var(--muted);">새 비밀번호로 로그인해 주세요.</div></div>
+      <button class="btn btn-primary" onclick="showC('login')">로그인 화면으로</button>
+    </div>
+  </div>
+</div>
+
 <!-- 로딩 (보험) -->
 <div class="loading-wrap" id="loading"><div class="spinner"></div><div class="loading-text">보험계약 분석 중</div><div class="loading-sub">잠시만 기다려 주세요</div><div class="loading-steps"><div class="ls-item" id="ls1"><div class="ls-icon">1</div>정액형 보장계약 조회</div><div class="ls-item" id="ls2"><div class="ls-icon">2</div>실손형 보장계약 조회</div><div class="ls-item" id="ls3"><div class="ls-icon">3</div>자동차보험 조회</div><div class="ls-item" id="ls4"><div class="ls-icon">4</div>분석 완료</div></div></div>
 
@@ -208,7 +286,7 @@ var regState={userName:'',birth:'',ssnBack:'',mobileCo:'SKT',authType:'mobile',m
 
 async function callGAS(action,params){var body=Object.assign({action:action},params);var res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(body)});var data=await res.json();if(!data.success&&data.message)throw new Error(data.message);return data;}
 
-function showC(v){['login-card','register-card','income-card'].forEach(function(id){document.getElementById(id).classList.add('hidden');});if(v)document.getElementById(v+'-card').classList.remove('hidden');}
+function showC(v){['login-card','register-card','income-card','find-id-card','find-pw-card'].forEach(function(id){document.getElementById(id).classList.add('hidden');});if(v)document.getElementById(v+'-card').classList.remove('hidden');}
 function setStep(n){for(var i=1;i<=3;i++){var si=document.getElementById('s'+i),d=document.getElementById('sd'+i);si.classList.remove('active','done');if(i<n){si.classList.add('done');d.textContent='✓';}else if(i===n){si.classList.add('active');d.textContent=i;}else d.textContent=i;}}
 function showErr(id,msg){var el=document.getElementById(id);el.textContent=msg;el.classList.add('show');}
 function clearErr(id){document.getElementById(id).classList.remove('show');}
@@ -293,6 +371,111 @@ async function regA(){clearErr('reg-a-err');var name=document.getElementById('r-
 async function regB(){clearErr('reg-b-err');var c=document.getElementById('r-captcha').value.trim();if(!c){showErr('reg-b-err','보안 문자 입력');return;}btnLoad('reg-b-btn',true);try{var data=await callGAS('register_captcha',Object.assign({},regState,{captcha_input:c}));regState.step_data=data.step_data;regState.proxy=data.proxy;document.getElementById('reg-b').classList.add('hidden');document.getElementById('reg-c').classList.remove('hidden');}catch(e){showErr('reg-b-err',e.message);}finally{btnLoad('reg-b-btn',false,'확인');}}
 async function regC(){clearErr('reg-c-err');var sms=document.getElementById('r-sms').value.trim(),id=document.getElementById('r-id').value.trim(),pw=document.getElementById('r-pw').value,em=document.getElementById('r-email').value.trim();if(!sms||!id||!pw||!em){showErr('reg-c-err','모든 항목 입력');return;}Object.assign(regState,{userId:id,userPw:pw,email:em});btnLoad('reg-c-btn',true);try{var sd=await callGAS('register_sms',Object.assign({},regState,{sms_input:sms}));regState.step_data=sd.step_data;regState.proxy=sd.proxy;var ec=prompt('이메일 인증번호:');if(!ec){showErr('reg-c-err','이메일 인증번호 필요');return;}await callGAS('register_email',Object.assign({},regState,{email_input:ec}));showC(null);await runInsurance(regState.userId,regState.userPw);}catch(e){showErr('reg-c-err',e.message);}finally{btnLoad('reg-c-btn',false,'가입 완료');}}
 
+/* ═══ 아이디 찾기 ═══ */
+var fidState={};
+async function fidA(){
+  clearErr('fid-a-err');
+  var name=document.getElementById('fid-name').value.trim(),f=document.getElementById('fid-ssn-front').value.trim(),b=document.getElementById('fid-ssn-back').value.trim(),telco=document.getElementById('fid-telco').value,phone=document.getElementById('fid-phone').value.trim();
+  if(!name||!f||!b||!phone){showErr('fid-a-err','모든 항목을 입력해 주세요.');return;}
+  if(f.length!==6||b.length!==7){showErr('fid-a-err','주민번호를 정확히 입력해 주세요.');return;}
+  var yp=parseInt(b[0])<=2?'19':'20';
+  fidState={userName:name,birth:yp+f,gender:b[0],mobileCo:telco,authType:'mobile',mobileNo:phone};
+  btnLoad('fid-a-btn',true);
+  try{
+    var data=await callGAS('find_id_init',fidState);
+    fidState.step_data=data.step_data;fidState.proxy=data.proxy;
+    if(data.captcha_img){var img=document.getElementById('fid-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fid-captcha-loading').classList.add('hidden');}
+    document.getElementById('fid-a').classList.add('hidden');
+    document.getElementById('fid-b').classList.remove('hidden');
+  }catch(e){showErr('fid-a-err',e.message);}
+  finally{btnLoad('fid-a-btn',false,'인증번호 받기');}
+}
+async function fidB(){
+  clearErr('fid-b-err');
+  var c=document.getElementById('fid-captcha-input').value.trim();
+  if(!c){showErr('fid-b-err','보안 문자를 입력해 주세요.');return;}
+  btnLoad('fid-b-btn',true);
+  try{
+    var data=await callGAS('find_id_captcha',Object.assign({},fidState,{step_input:c}));
+    fidState.step_data=data.step_data;fidState.proxy=data.proxy;
+    document.getElementById('fid-b').classList.add('hidden');
+    document.getElementById('fid-c').classList.remove('hidden');
+  }catch(e){showErr('fid-b-err',e.message);}
+  finally{btnLoad('fid-b-btn',false,'확인');}
+}
+async function fidC(){
+  clearErr('fid-c-err');
+  var s=document.getElementById('fid-sms').value.trim();
+  if(!s){showErr('fid-c-err','인증번호를 입력해 주세요.');return;}
+  btnLoad('fid-c-btn',true);
+  try{
+    var data=await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
+    document.getElementById('fid-result').textContent=data.userId||'(응답에 아이디 없음)';
+    document.getElementById('fid-c').classList.add('hidden');
+    document.getElementById('fid-d').classList.remove('hidden');
+  }catch(e){showErr('fid-c-err',e.message);}
+  finally{btnLoad('fid-c-btn',false,'아이디 찾기');}
+}
+
+/* ═══ 비밀번호 찾기 ═══ */
+var fpwState={};
+async function fpwA(){
+  clearErr('fpw-a-err');
+  var uid=document.getElementById('fpw-id').value.trim(),name=document.getElementById('fpw-name').value.trim(),f=document.getElementById('fpw-ssn-front').value.trim(),b=document.getElementById('fpw-ssn-back').value.trim(),telco=document.getElementById('fpw-telco').value,phone=document.getElementById('fpw-phone').value.trim();
+  if(!uid||!name||!f||!b||!phone){showErr('fpw-a-err','모든 항목을 입력해 주세요.');return;}
+  if(f.length!==6||b.length!==7){showErr('fpw-a-err','주민번호를 정확히 입력해 주세요.');return;}
+  var yp=parseInt(b[0])<=2?'19':'20';
+  fpwState={userId:uid,userName:name,birth:yp+f,gender:b[0],mobileCo:telco,authType:'mobile',mobileNo:phone};
+  btnLoad('fpw-a-btn',true);
+  try{
+    var data=await callGAS('find_pw_init',fpwState);
+    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
+    if(data.captcha_img){var img=document.getElementById('fpw-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fpw-captcha-loading').classList.add('hidden');}
+    document.getElementById('fpw-a').classList.add('hidden');
+    document.getElementById('fpw-b').classList.remove('hidden');
+  }catch(e){showErr('fpw-a-err',e.message);}
+  finally{btnLoad('fpw-a-btn',false,'인증번호 받기');}
+}
+async function fpwB(){
+  clearErr('fpw-b-err');
+  var c=document.getElementById('fpw-captcha-input').value.trim();
+  if(!c){showErr('fpw-b-err','보안 문자를 입력해 주세요.');return;}
+  btnLoad('fpw-b-btn',true);
+  try{
+    var data=await callGAS('find_pw_captcha',Object.assign({},fpwState,{step_input:c}));
+    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
+    document.getElementById('fpw-b').classList.add('hidden');
+    document.getElementById('fpw-c').classList.remove('hidden');
+  }catch(e){showErr('fpw-b-err',e.message);}
+  finally{btnLoad('fpw-b-btn',false,'확인');}
+}
+async function fpwC(){
+  clearErr('fpw-c-err');
+  var s=document.getElementById('fpw-sms').value.trim();
+  if(!s){showErr('fpw-c-err','인증번호를 입력해 주세요.');return;}
+  btnLoad('fpw-c-btn',true);
+  try{
+    var data=await callGAS('find_pw_sms',Object.assign({},fpwState,{step_input:s,sendMethod:'mobile'}));
+    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
+    document.getElementById('fpw-c').classList.add('hidden');
+    document.getElementById('fpw-d').classList.remove('hidden');
+  }catch(e){showErr('fpw-c-err',e.message);}
+  finally{btnLoad('fpw-c-btn',false,'임시 비밀번호 받기');}
+}
+async function fpwD(){
+  clearErr('fpw-d-err');
+  var tmp=document.getElementById('fpw-tmp').value.trim(),np=document.getElementById('fpw-new').value,np2=document.getElementById('fpw-new2').value;
+  if(!tmp||!np||!np2){showErr('fpw-d-err','모든 항목을 입력해 주세요.');return;}
+  if(np!==np2){showErr('fpw-d-err','새 비밀번호가 일치하지 않습니다.');return;}
+  if(np.length<8){showErr('fpw-d-err','비밀번호는 8자 이상으로 설정해 주세요.');return;}
+  btnLoad('fpw-d-btn',true);
+  try{
+    await callGAS('find_pw_change',Object.assign({},fpwState,{tmpPw:tmp,userPw:np}));
+    document.getElementById('fpw-d').classList.add('hidden');
+    document.getElementById('fpw-e').classList.remove('hidden');
+  }catch(e){showErr('fpw-d-err',e.message);}
+  finally{btnLoad('fpw-d-btn',false,'비밀번호 변경');}
+}
 /* USP */
 (function(){var P=document.querySelectorAll('.usp-phrase'),D=document.querySelectorAll('.usp-cdot'),DU=[4500,4500,6000,4500,6500],c=0,t=P.length,r,st;function sh(i){P.forEach(function(el,j){el.classList.toggle('active',j===i);});D.forEach(function(el,j){el.classList.toggle('active',j===i);});c=i;ap(DU[i]);}function ap(d){cancelAnimationFrame(r);st=performance.now();function tk(n){if((n-st)/d<1)r=requestAnimationFrame(tk);else sh((c+1)%t);}r=requestAnimationFrame(tk);}window.uspNext=function(){cancelAnimationFrame(r);sh((c+1)%t);};D.forEach(function(d,i){d.addEventListener('click',function(e){e.stopPropagation();cancelAnimationFrame(r);sh(i);});});sh(0);})();
 </script>
