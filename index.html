@@ -10,25 +10,30 @@
 *{box-sizing:border-box;margin:0;padding:0;}html,body{height:100%;}
 body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background:var(--gray);color:var(--text);-webkit-font-smoothing:antialiased;}
 .app-shell{width:100%;display:flex;flex-direction:column;}
-@media(min-width:600px){body{display:flex;justify-content:center;align-items:flex-start;padding:32px 16px 60px;min-height:100vh;}.app-shell{width:460px;border-radius:20px;overflow:hidden;box-shadow:0 8px 48px rgba(28,43,74,.2);}}
+@media(min-width:600px){body{display:flex;justify-content:center;align-items:flex-start;padding:32px 16px 60px;min-height:100vh;}.app-shell{width:500px;border-radius:20px;overflow:hidden;box-shadow:0 8px 48px rgba(28,43,74,.2);}}
 #page-wrap{flex:1;display:flex;flex-direction:column;}
-.header{background:var(--navy);padding:12px 18px 10px;display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--gold);}
-.header-logo{width:44px;height:44px;border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);object-fit:cover;}
-.header-name{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.4px;line-height:1.3;}.header-name span{color:var(--gold-bd);}
-.header-sub{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:3px;}
-.trust-bar{background:var(--navy-dk);padding:4px 18px;display:flex;align-items:center;gap:16px;}
-.trust-item{display:flex;align-items:center;gap:5px;font-size:9.5px;color:rgba(255,255,255,.5);font-weight:500;}
+.header{background:var(--navy);padding:18px 22px 14px;display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--gold);}
+.header-logo{width:54px;height:54px;border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);object-fit:cover;object-position:center;}
+.header-name{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.3;}.header-name span{color:var(--gold-bd);}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:4px;letter-spacing:.3px;}
+.trust-bar{background:var(--navy-dk);padding:9px 22px;display:flex;align-items:center;gap:18px;}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:rgba(255,255,255,.62);font-weight:500;}
 .trust-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
 
-.usp{background:var(--navy-dk);padding:8px 20px 6px;}.usp-label{font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(240,200,122,.55);display:flex;align-items:center;gap:8px;margin-bottom:8px;}.usp-label::before{content:'';width:16px;height:1.5px;background:rgba(240,200,122,.55);}
+.usp{background:var(--navy-dk);padding:20px 22px 24px;}.usp-label{font-size:11px;font-weight:700;letter-spacing:.16em;color:rgba(240,200,122,.62);display:flex;align-items:center;gap:10px;margin-bottom:14px;}.usp-label::before{content:'';width:18px;height:1.5px;background:rgba(240,200,122,.55);}
 .usp-phrase-wrap{position:relative;min-height:108px;display:flex;align-items:center;justify-content:center;cursor:pointer;}.usp-phrase{position:absolute;width:100%;text-align:center;opacity:0;transition:opacity .75s;pointer-events:none;}.usp-phrase.active{opacity:1;pointer-events:auto;}
-.usp-ph-big{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.35;}.usp-ph-sm{font-size:13px;color:rgba(255,255,255,.58);line-height:1.7;margin-top:6px;}
-.usp-ph-list{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:6px;}.usp-ph-end{font-size:14px;font-weight:700;color:rgba(255,255,255,.82);margin-top:4px;}
-.usp-ph-closing-msg{font-size:12.5px;color:rgba(255,255,255,.52);line-height:1.75;margin-bottom:10px;}.usp-ph-brand{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}.usp-ph-brand-sub{font-size:10.5px;color:rgba(240,200,122,.6);padding-bottom:18px;}
-.usp-cdots{display:flex;justify-content:center;gap:5px;margin-top:4px;}.usp-cdot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s;}.usp-cdot.active{width:16px;border-radius:2px;background:var(--gold);}
+.usp-ph-big{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.7px;line-height:1.4;}.usp-ph-sm{font-size:13px;color:rgba(255,255,255,.58);line-height:1.7;margin-top:6px;}
+.usp-ph-list{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:6px;}.usp-ph-end{font-size:15px;font-weight:700;color:rgba(255,255,255,.85);margin-top:4px;}
+.usp-ph-closing-msg{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:10px;}.usp-ph-brand{font-size:19px;font-weight:800;color:#fff;margin-bottom:4px;}.usp-ph-brand-sub{font-size:11px;color:rgba(240,200,122,.62);padding-bottom:18px;}
+.usp-cdots{display:flex;justify-content:center;gap:5px;margin-top:14px;}.usp-cdot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .3s;cursor:pointer;}.usp-cdot.active{width:18px;border-radius:2px;background:var(--gold);}
 
-.svc-select{padding:16px 14px 8px;}.svc-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-left:4px;}
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.svc-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;cursor:pointer;transition:all .2s;}.svc-card:hover{border-color:var(--navy);}.svc-icon{font-size:32px;margin-bottom:10px;}.svc-name{font-size:14px;font-weight:700;color:var(--navy);}.svc-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+.svc-select{padding:36px 22px 56px;}.svc-title{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:20px;padding-left:4px;letter-spacing:-.3px;}
+.svc-grid{display:flex;flex-direction:column;gap:18px;}
+.svc-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:48px 26px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:24px;min-height:192px;text-align:left;}.svc-card:hover{border-color:var(--navy);}
+.svc-icon{width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:42px;flex-shrink:0;line-height:1;background:var(--navy-lt);}
+.svc-card.svc-income .svc-icon{background:var(--gold-lt);}
+.svc-text{flex:1;}.svc-name{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px;}.svc-desc{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7;}
+.svc-arrow{font-size:26px;color:var(--hint);flex-shrink:0;font-weight:300;}
 
 .steps{display:flex;align-items:center;padding:7px 18px;background:#fff;border-bottom:1px solid var(--border);}.step-item{display:flex;align-items:center;gap:7px;flex:1;font-size:11.5px;color:var(--hint);font-weight:500;}.step-item.active{color:var(--navy);}.step-item.done{color:var(--gold);}
 .step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint);background:#fff;transition:all .25s;}.step-item.active .step-dot{background:var(--navy);border-color:var(--navy);color:#fff;}.step-item.done .step-dot{background:var(--gold);border-color:var(--gold);color:#fff;}
@@ -66,20 +71,20 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 <body>
 <div class="app-shell">
 <div class="header">
-  <img class="header-logo" src="" alt="">
+  <img class="header-logo" src="data:image/jpeg;base64,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" alt="엘리트손해사정법인 로고">
   <div><div class="header-name"><span>엘리트</span>손해사정법인</div><div class="header-sub">Claims Survey &amp; Adjusting</div></div>
 </div>
 <div class="trust-bar">
   <div class="trust-item"><div class="trust-dot"></div>금융감독원 등록</div>
   <div class="trust-item"><div class="trust-dot"></div>개인정보 암호화</div>
-  <div class="trust-item"><div class="trust-dot"></div><a href="tel:031-870-8465" style="color:rgba(255,255,255,.5);text-decoration:none;">031-870-8465</a></div>
+  <div class="trust-item"><div class="trust-dot"></div><a href="tel:031-870-8465" style="color:rgba(255,255,255,.62);text-decoration:none;">031-870-8465</a></div>
 </div>
 <div class="usp"><div class="usp-label">엘리트만의 차이</div>
   <div class="usp-phrase-wrap" onclick="uspNext()">
     <div class="usp-phrase active" id="uph0"><div class="usp-ph-big">사고도 보험도<br>참 복잡하죠?</div></div>
     <div class="usp-phrase" id="uph1"><div class="usp-ph-big">사고나서야 아셨을 겁니다.</div><div class="usp-ph-sm">내 보험인데, 나만 모른다는 걸.</div></div>
-    <div class="usp-phrase" id="uph2"><div class="usp-ph-list"><div>뭘 받을 수 있는지</div><div>뭘 받아야만 하는지</div><div>누구 말을 믿어야 하는지</div></div><div class="usp-ph-end">알 길이 없으셨을 겁니다.</div></div>
-    <div class="usp-phrase" id="uph3"><div class="usp-ph-sm" style="margin-bottom:8px;">보상만으론</div><div class="usp-ph-big" style="font-size:19px;">돌아오지 않는 것들이 있습니다.</div></div>
+    <div class="usp-phrase" id="uph2"><div class="usp-ph-list"><div>뭘 받을 수 있는지</div><div>어떻게 받아야 하는지</div><div>누구 말을 믿어야 하는지</div></div><div class="usp-ph-end">알 길이 없으셨을 겁니다.</div></div>
+    <div class="usp-phrase" id="uph3"><div class="usp-ph-sm" style="margin-bottom:8px;">보상만으론</div><div class="usp-ph-big" style="font-size:19px;">돌아오지 않는 것들이 있음을<br>잘 알고있습니다.</div></div>
     <div class="usp-phrase" id="uph4"><div class="usp-ph-closing-msg">저희가 이 일을 가볍게<br>여기지 않는 이유입니다.</div><div class="usp-ph-brand">엘리트손해사정법인</div><div class="usp-ph-brand-sub">타 손해사정사 종결건 · 재검토 이후 추가보상 사례 다수</div></div>
   </div>
   <div class="usp-cdots" id="uspCdots"><div class="usp-cdot active"></div><div class="usp-cdot"></div><div class="usp-cdot"></div><div class="usp-cdot"></div><div class="usp-cdot"></div></div>
@@ -91,8 +96,22 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 <div class="svc-select" id="svc-select">
   <div class="svc-title">분석 서비스 선택</div>
   <div class="svc-grid">
-    <div class="svc-card" onclick="selectSvc('insurance')"><div class="svc-icon">📋</div><div class="svc-name">보험계약 조회</div><div class="svc-desc">내보험다보여(credit4u)<br>가입 보험 전체 분석</div></div>
-    <div class="svc-card" onclick="selectSvc('income')"><div class="svc-icon">💰</div><div class="svc-name">소득정보 조회</div><div class="svc-desc">홈택스 간편인증<br>소득 입증 자료 조회</div></div>
+    <div class="svc-card" onclick="selectSvc('insurance')">
+      <div class="svc-icon">📋</div>
+      <div class="svc-text">
+        <div class="svc-name">보험계약 조회</div>
+        <div class="svc-desc">내보험다보여(credit4u)<br>가입 보험 전체 분석</div>
+      </div>
+      <div class="svc-arrow">›</div>
+    </div>
+    <div class="svc-card svc-income" onclick="selectSvc('income')">
+      <div class="svc-icon">💰</div>
+      <div class="svc-text">
+        <div class="svc-name">소득정보 조회</div>
+        <div class="svc-desc">홈택스 간편인증<br>소득 입증 자료 조회</div>
+      </div>
+      <div class="svc-arrow">›</div>
+    </div>
   </div>
 </div>
 
@@ -278,7 +297,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-findpwdebug-2026-04-19','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-redesign-2026-05-20','color:#c8851a;font-weight:bold;');
 
 var GAS_URL="https://script.google.com/macros/s/AKfycbxuYfGlk6DgWHn-uor9m-uicU2DG7XLW8BQMKAyMVo7za-TcfF6Is1DbwZb3_Jobc_2/exec";
 var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
@@ -381,7 +400,6 @@ async function regC(){clearErr('reg-c-err');var sms=document.getElementById('r-s
 /* ═══ 아이디 찾기 ═══ */
 var fidState={};
 async function fidA(){
-  alert('[DEBUG] fidA 진입 — 코드 반영 OK');
   clearErr('fid-a-err');
   var name=document.getElementById('fid-name').value.trim(),f=document.getElementById('fid-ssn-front').value.trim(),b=document.getElementById('fid-ssn-back').value.trim(),telco=document.getElementById('fid-telco').value,phone=document.getElementById('fid-phone').value.trim();
   if(!name||!f||!b||!phone){showErr('fid-a-err','모든 항목을 입력해 주세요.');return;}
@@ -391,7 +409,6 @@ async function fidA(){
   btnLoad('fid-a-btn',true);
   try{
     var data=await callGAS('find_id_init',fidState);
-    alert('[DEBUG] 아이디찾기 init 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\ndata='+JSON.stringify({step_data:data.step_data?'[있음]':'[없음]',proxy:data.proxy,captcha_img:data.captcha_img?'[있음]':'[없음]'},null,2));
     fidState.step_data=data.step_data;fidState.proxy=data.proxy;
     if(data.captcha_img){var img=document.getElementById('fid-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fid-captcha-loading').classList.add('hidden');}
     document.getElementById('fid-a').classList.add('hidden');
@@ -406,7 +423,6 @@ async function fidB(){
   btnLoad('fid-b-btn',true);
   try{
     var data=await callGAS('find_id_captcha',Object.assign({},fidState,{step_input:c}));
-    alert('[DEBUG] 아이디찾기 captcha 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\nraw='+JSON.stringify(data.raw,null,2));
     fidState.step_data=data.step_data;fidState.proxy=data.proxy;
     if(data.captcha_img){
       document.getElementById('fid-captcha-img').src='data:image/jpeg;base64,'+data.captcha_img;
@@ -426,7 +442,6 @@ async function fidC(){
   btnLoad('fid-c-btn',true);
   try{
     var data=await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
-    alert('[DEBUG] 아이디찾기 sms 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\nraw='+JSON.stringify(data.raw,null,2));
     document.getElementById('fid-result').textContent=data.userId||(data.raw&&(data.raw.userId||data.raw.user_id||data.raw.id))||'(응답에 아이디 없음)';
     document.getElementById('fid-c').classList.add('hidden');
     document.getElementById('fid-d').classList.remove('hidden');
@@ -437,7 +452,6 @@ async function fidC(){
 /* ═══ 비밀번호 찾기 ═══ */
 var fpwState={};
 async function fpwA(){
-  alert('[DEBUG] fpwA 진입 — 코드 반영 OK');
   clearErr('fpw-a-err');
   var uid=document.getElementById('fpw-id').value.trim(),name=document.getElementById('fpw-name').value.trim(),f=document.getElementById('fpw-ssn-front').value.trim(),b=document.getElementById('fpw-ssn-back').value.trim(),telco=document.getElementById('fpw-telco').value,phone=document.getElementById('fpw-phone').value.trim();
   if(!uid||!name||!f||!b||!phone){showErr('fpw-a-err','모든 항목을 입력해 주세요.');return;}
@@ -447,7 +461,6 @@ async function fpwA(){
   btnLoad('fpw-a-btn',true);
   try{
     var data=await callGAS('find_pw_init',fpwState);
-    alert('[DEBUG] 비번찾기 init 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\ndata='+JSON.stringify({step_data:data.step_data?'[있음]':'[없음]',proxy:data.proxy,captcha_img:data.captcha_img?'[있음]':'[없음]'},null,2));
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     if(data.captcha_img){var img=document.getElementById('fpw-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fpw-captcha-loading').classList.add('hidden');}
     document.getElementById('fpw-a').classList.add('hidden');
@@ -462,7 +475,6 @@ async function fpwB(){
   btnLoad('fpw-b-btn',true);
   try{
     var data=await callGAS('find_pw_captcha',Object.assign({},fpwState,{step_input:c}));
-    alert('[DEBUG] 비번찾기 captcha 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\nraw='+JSON.stringify(data.raw,null,2));
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     if(data.captcha_img){
       document.getElementById('fpw-captcha-img').src='data:image/jpeg;base64,'+data.captcha_img;
@@ -482,7 +494,6 @@ async function fpwC(){
   btnLoad('fpw-c-btn',true);
   try{
     var data=await callGAS('find_pw_sms',Object.assign({},fpwState,{step_input:s,sendMethod:'mobile'}));
-    alert('[DEBUG] 비번찾기 sms 응답:\ncommon='+JSON.stringify(data.common,null,2)+'\n\nraw='+JSON.stringify(data.raw,null,2));
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     document.getElementById('fpw-c').classList.add('hidden');
     document.getElementById('fpw-d').classList.remove('hidden');
