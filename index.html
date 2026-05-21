@@ -233,7 +233,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
     </div>
     <div id="fid-d" class="hidden">
       <div class="complete-emblem" style="margin:20px auto;">✓</div>
-      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:14px;color:var(--muted);margin-bottom:10px;">고객님의 아이디는</div><div id="fid-result" style="font-size:20px;font-weight:800;color:var(--navy);padding:10px 20px;background:var(--gold-lt);border-radius:10px;display:inline-block;"></div><div style="font-size:13px;color:var(--muted);margin-top:12px;">입니다.</div></div>
+      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:10px;">본인인증이 완료됐습니다</div><div style="font-size:14px;color:var(--muted);line-height:1.7;">아이디를 카카오톡 알림톡으로<br>보내드렸습니다.<br>휴대폰을 확인해 주세요.</div></div>
       <button class="btn btn-primary" onclick="showC('login')">로그인 화면으로</button>
     </div>
   </div>
@@ -441,9 +441,7 @@ async function fidC(){
   if(!s){showErr('fid-c-err','인증번호를 입력해 주세요.');return;}
   btnLoad('fid-c-btn',true);
   try{
-    var data=await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
-    var foundId=data.userId||(data.raw&&(data.raw.userId||data.raw.user_id||data.raw.id))||'';
-    document.getElementById('fid-result').textContent = foundId || ('[디버그] '+JSON.stringify(data).slice(0,400));
+    await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
     document.getElementById('fid-c').classList.add('hidden');
     document.getElementById('fid-d').classList.remove('hidden');
   }catch(e){showErr('fid-c-err',e.message);}
@@ -498,7 +496,6 @@ async function fpwC(){
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     document.getElementById('fpw-c').classList.add('hidden');
     document.getElementById('fpw-d').classList.remove('hidden');
-    showErr('fpw-d-err','[디버그] '+JSON.stringify(data).slice(0,400));
   }catch(e){showErr('fpw-c-err',e.message);}
   finally{btnLoad('fpw-c-btn',false,'임시 비밀번호 받기');}
 }
