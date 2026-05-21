@@ -442,7 +442,8 @@ async function fidC(){
   btnLoad('fid-c-btn',true);
   try{
     var data=await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
-    document.getElementById('fid-result').textContent=data.userId||(data.raw&&(data.raw.userId||data.raw.user_id||data.raw.id))||'(응답에 아이디 없음)';
+    var foundId=data.userId||(data.raw&&(data.raw.userId||data.raw.user_id||data.raw.id))||'';
+    document.getElementById('fid-result').textContent = foundId || ('[디버그] '+JSON.stringify(data).slice(0,400));
     document.getElementById('fid-c').classList.add('hidden');
     document.getElementById('fid-d').classList.remove('hidden');
   }catch(e){showErr('fid-c-err',e.message);}
@@ -497,6 +498,7 @@ async function fpwC(){
     fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
     document.getElementById('fpw-c').classList.add('hidden');
     document.getElementById('fpw-d').classList.remove('hidden');
+    showErr('fpw-d-err','[디버그] '+JSON.stringify(data).slice(0,400));
   }catch(e){showErr('fpw-c-err',e.message);}
   finally{btnLoad('fpw-c-btn',false,'임시 비밀번호 받기');}
 }
