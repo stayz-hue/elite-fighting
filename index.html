@@ -313,7 +313,7 @@ async function callGAS(action,params){
   var body=Object.assign({action:action},params);
   var res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify(body)});
   var data=await res.json();
-  if(!data.success&&data.message)throw new Error(data.message);
+if(!data.success&&data.message){var err=new Error(data.message);err.serverError=true;throw err;}
   return data;
 }
 
@@ -376,22 +376,18 @@ async function incComplete(){
   clearErr('inc-b-err');
   btnLoad('inc-b-btn',true);
   document.getElementById('income-card').classList.add('hidden');
-
   setStep(2);
   document.getElementById('inc-loading').classList.add('show');
   var steps=['ils1','ils2','ils3','ils4'],idx=0;
   var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},900);
-
-  try{
-    var data=await callGAS('income_complete',incState);
-    clearInterval(iv);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});
-    setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);showIncComplete();},800);
-  }catch(e){
-    clearInterval(iv);document.getElementById('inc-loading').classList.remove('show');
-    document.getElementById('income-card').classList.remove('hidden');
-    document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');
-    showErr('inc-a-err',e.message);setStep(1);btnLoad('inc-b-btn',false,'인증 완료 · 소득정보 조회');
-  }
+  var done=false,timer;
+  function toComplete(){if(done)return;done=true;clearInterval(iv);clearTimeout(timer);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);showIncComplete();},600);}
+  function toError(msg){if(done)return;done=true;clearInterval(iv);clearTimeout(timer);document.getElementById('inc-loading').classList.remove('show');document.getElementById('income-card').classList.remove('hidden');document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');showErr('inc-a-err',msg);setStep(1);btnLoad('inc-b-btn',false,'인증 완료 · 소득정보 조회');}
+  // 조회량이 많으면 응답이 1~2분 걸려 모바일에서 끊길 수 있음. 서버는 백그라운드로 계속 처리·전송하므로
+  // 45초 넘게 지연되거나 연결이 끊기면 완료로 넘기고, '서버가 준 진짜 오류'일 때만 폼으로 되돌림.
+  timer=setTimeout(toComplete,45000);
+  try{ await callGAS('income_complete',incState); toComplete(); }
+  catch(e){ if(e&&e.serverError) toError(e.message); else toComplete(); }
 }
 
 /* ═══ 소득 완료 화면 ═══ */
