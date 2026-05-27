@@ -352,7 +352,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medical-2026-05-23','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-medical-1tap-2026-05-27','color:#c8851a;font-weight:bold;');
 
 var GAS_URL="https://script.google.com/macros/s/AKfycbxuYfGlk6DgWHn-uor9m-uicU2DG7XLW8BQMKAyMVo7za-TcfF6Is1DbwZb3_Jobc_2/exec";
 var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
@@ -479,7 +479,7 @@ async function medStart(){
   btnLoad('med-a-btn',true);
   try{
     var data=await callGAS('medical_init',medState);
-medState.stepData=data.stepData||data.sessionKey||''; medState.userData=data.userData||''; medState.cookieData=data.cookieData||data.sessionKey||'';
+    medState.cache_key=data.cache_key||'';
     document.getElementById('med-a').classList.add('hidden');
     document.getElementById('med-b').classList.remove('hidden');
     goForward(function(){document.getElementById('med-b').classList.add('hidden');document.getElementById('med-a').classList.remove('hidden');});
