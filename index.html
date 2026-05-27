@@ -479,7 +479,7 @@ async function medStart(){
   btnLoad('med-a-btn',true);
   try{
     var data=await callGAS('medical_init',medState);
-    medState.stepData=data.stepData; medState.userData=data.userData||''; medState.cookieData=data.cookieData||'';
+medState.stepData=data.stepData||data.sessionKey||''; medState.userData=data.userData||''; medState.cookieData=data.cookieData||data.sessionKey||'';
     document.getElementById('med-a').classList.add('hidden');
     document.getElementById('med-b').classList.remove('hidden');
     goForward(function(){document.getElementById('med-b').classList.add('hidden');document.getElementById('med-a').classList.remove('hidden');});
