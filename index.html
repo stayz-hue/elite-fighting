@@ -330,20 +330,20 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 <div class="loading-wrap" id="med-loading"><div class="spinner"></div><div class="loading-text">📱 휴대폰에서 인증을 완료해 주세요</div><div class="loading-sub">인증 후 진료내역을 조회합니다 · 최대 1~2분 소요</div><div class="loading-steps"><div class="ls-item" id="mls1"><div class="ls-icon">1</div>본인인증 확인</div><div class="ls-item" id="mls2"><div class="ls-icon">2</div>진료내역 조회</div><div class="ls-item" id="mls3"><div class="ls-icon">3</div>상병·검사 분석</div><div class="ls-item" id="mls4"><div class="ls-icon">4</div>완료</div></div></div>
 
 <!-- 완료 (보험) -->
-<div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div><button class="btn btn-primary" onclick="goMedical()" style="margin-top:20px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
+<div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div><button class="btn btn-primary" onclick="goMedical()" style="margin-top:20px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-primary" onclick="goIncome()" style="margin-top:8px;">💰 소득정보도 조회하기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
 
 <!-- 완료 (소득) -->
-<div class="complete-wrap" id="inc-complete"><div class="complete-emblem">💰</div><div class="complete-title">소득정보 분석 완료!</div><div class="complete-body">소득정보 조회 및 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div></div><button class="btn btn-outline" onclick="goHome()" style="margin-top:20px;font-size:13px;">← 처음으로 가기</button></div>
+<div class="complete-wrap" id="inc-complete"><div class="complete-emblem">💰</div><div class="complete-title">소득정보 분석 완료!</div><div class="complete-body">소득정보 조회 및 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div></div><button class="btn btn-primary" onclick="goInsurance()" style="margin-top:20px;">📋 보험계약도 조회하기</button><button class="btn btn-primary" onclick="goMedical()" style="margin-top:8px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
 
 <!-- 완료 (진료내역) -->
-<div class="complete-wrap" id="med-complete"><div class="complete-emblem">🔍</div><div class="complete-title">진료내역 분석 완료!</div><div class="complete-body">최근 5년 진료내역 조회가 완료됐습니다.<br>청구 누락 가능 건을 검토해 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">사고·고가검사 이력 기반 추가청구 가능성 검토</div></div></div><button class="btn btn-outline" onclick="goHome()" style="margin-top:20px;font-size:13px;">← 처음으로 가기</button></div>
+<div class="complete-wrap" id="med-complete"><div class="complete-emblem">🔍</div><div class="complete-title">진료내역 분석 완료!</div><div class="complete-body">최근 5년 진료내역 조회가 완료됐습니다.<br>청구 누락 가능 건을 검토해 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">사고·고가검사 이력 기반 추가청구 가능성 검토</div></div></div><button class="btn btn-primary" onclick="goInsurance()" style="margin-top:20px;">📋 보험계약도 조회하기</button><button class="btn btn-primary" onclick="goIncome()" style="margin-top:8px;">💰 소득정보도 조회하기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
 
 </div><!-- page-wrap -->
 </div><!-- app-shell -->
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medical-1tap-b-2026-05-27','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-crosslinks-2026-05-27','color:#c8851a;font-weight:bold;');
 
 var GAS_URL="https://script.google.com/macros/s/AKfycbxuYfGlk6DgWHn-uor9m-uicU2DG7XLW8BQMKAyMVo7za-TcfF6Is1DbwZb3_Jobc_2/exec";
 var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
@@ -379,15 +379,20 @@ function selectSvc(svc){
   showC(svc==='income'?'income':(svc==='medical'?'medical':'login'));
   goForward(goBack);
 }
-function goMedical(){
-  document.getElementById('complete').classList.remove('show');
-  curSvc='medical';
+function goService(svc){
+  ['complete','inc-complete','med-complete'].forEach(function(id){document.getElementById(id).classList.remove('show');});
+  document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');
+  document.getElementById('med-a').classList.remove('hidden');
+  curSvc=svc;
   document.getElementById('step-bar').classList.remove('hidden');
-  document.getElementById('sl1').textContent='인증';
+  document.getElementById('sl1').textContent=(svc==='income'||svc==='medical')?'인증':'로그인';
   setStep(1);
-  showC('medical');
+  showC(svc==='income'?'income':(svc==='medical'?'medical':'login'));
   goForward(goBack);
 }
+function goMedical(){goService('medical');}
+function goIncome(){goService('income');}
+function goInsurance(){goService('insurance');}
 function goBack(){resetBack();curSvc='';['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
 function goHome(){resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
 function toggleTelco(){var isPass=document.getElementById('inc-auth').value==='pass';document.getElementById('inc-telco-wrap').classList.toggle('hidden',!isPass);}
