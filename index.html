@@ -328,7 +328,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 <div class="loading-wrap" id="inc-loading"><div class="spinner"></div><div class="loading-text">소득정보 조회 중</div><div class="loading-sub">홈택스 데이터를 가져오고 있습니다</div><div class="loading-steps"><div class="ls-item" id="ils1"><div class="ls-icon">1</div>소득금액증명 조회</div><div class="ls-item" id="ils2"><div class="ls-icon">2</div>소득내역 상세 조회</div><div class="ls-item" id="ils3"><div class="ls-icon">3</div>데이터 분석</div><div class="ls-item" id="ils4"><div class="ls-icon">4</div>완료</div></div></div>
 
 <!-- 로딩 (진료내역) -->
-<div class="loading-wrap" id="med-loading"><div class="spinner"></div><div class="loading-text">📱 휴대폰에서 인증을 완료해 주세요</div><div class="loading-sub">인증 후 진료내역을 조회합니다 · 최대 1~2분 소요</div><div class="loading-steps"><div class="ls-item" id="mls1"><div class="ls-icon">1</div>본인인증 확인</div><div class="ls-item" id="mls2"><div class="ls-icon">2</div>진료내역 조회</div><div class="ls-item" id="mls3"><div class="ls-icon">3</div>상병·검사 분석</div><div class="ls-item" id="mls4"><div class="ls-icon">4</div>완료</div></div></div>
+<div class="loading-wrap" id="med-loading"><div class="spinner"></div><div class="loading-text">📱 휴대폰에서 인증을 완료해 주세요</div><div class="loading-sub">인증 후 진료내역을 조회합니다 · 최대 1~2분 소요</div><div class="loading-steps"><div class="ls-item" id="mls1"><div class="ls-icon">1</div>본인인증 확인</div><div class="ls-item" id="mls2"><div class="ls-icon">2</div>진료내역 조회</div><div class="ls-item" id="mls3"><div class="ls-icon">3</div>상병·검사 분석</div><div class="ls-item" id="mls4"><div class="ls-icon">4</div>완료</div></div><button class="btn btn-outline" onclick="medBackHome()" style="margin-top:22px;max-width:220px;margin-left:auto;margin-right:auto;font-size:13px;">← 처음으로</button></div>
 
 <!-- 완료 (보험) -->
 <div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div><button class="btn btn-primary" onclick="goMedical()" style="margin-top:20px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-primary" onclick="goIncome()" style="margin-top:8px;">💰 소득정보도 조회하기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
@@ -359,6 +359,17 @@ console.log('%c[BUILD] v-medjob-2026-06-08','color:#c8851a;font-weight:bold;');
 var GAS_URL="https://script.google.com/macros/s/AKfycbxuYfGlk6DgWHn-uor9m-uicU2DG7XLW8BQMKAyMVo7za-TcfF6Is1DbwZb3_Jobc_2/exec";
 var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
 var curSvc='',incState={},medState={};
+var medPollTimer=null,medGiveUpTimer=null;
+// 진료내역 UI/폴링 상태 초기화 (탭 재진입·뒤로가기 시 버튼 굳음·유령 폴링 방지)
+function medUIReset(){
+  if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}
+  if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}
+  clearErr('med-a-err');
+  btnLoad('med-a-btn',false,'간편인증 요청');
+  document.getElementById('med-loading').classList.remove('show');
+  document.getElementById('med-a').classList.remove('hidden');
+}
+function medBackHome(){ medUIReset(); goHome(); }
 var regState={userName:'',birth:'',ssnBack:'',mobileCo:'SKT',authType:'mobile',mobileNo:'',step_data:'',proxy:'',userId:'',userPw:'',email:''};
 
 /* ═══ 브라우저 뒤로가기 보완: 인증 중 뒤로가기 시 첫 페이지로 튕기지 않고 직전 화면으로 ═══ */
@@ -382,6 +393,7 @@ function clearErr(id){document.getElementById(id).classList.remove('show');}
 function btnLoad(id,on,txt){var b=document.getElementById(id);b.disabled=on;if(on)b.textContent='처리 중...';else if(txt)b.textContent=txt;}
 
 function selectSvc(svc){
+  medUIReset();
   curSvc=svc;
   document.getElementById('svc-select').classList.add('hidden');
   document.getElementById('step-bar').classList.remove('hidden');
@@ -391,6 +403,7 @@ function selectSvc(svc){
   goForward(goBack);
 }
 function goService(svc){
+  medUIReset();
   ['complete','inc-complete','med-complete'].forEach(function(id){document.getElementById(id).classList.remove('show');});
   document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');
   document.getElementById('med-a').classList.remove('hidden');
@@ -404,8 +417,8 @@ function goService(svc){
 function goMedical(){goService('medical');}
 function goIncome(){goService('income');}
 function goInsurance(){goService('insurance');}
-function goBack(){resetBack();curSvc='';['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
-function goHome(){resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
+function goBack(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}resetBack();curSvc='';['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
+function goHome(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}btnLoad('med-a-btn',false,'간편인증 요청');resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
 function toggleTelco(){var isPass=document.getElementById('inc-auth').value==='pass';document.getElementById('inc-telco-wrap').classList.toggle('hidden',!isPass);}
 
 /* ═══ 보험 ═══ */
@@ -487,8 +500,8 @@ async function medStart(){
   var steps=['mls1','mls2','mls3','mls4'],idx=0;
   var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},1200);
 
-  var done=false,pollTimer,giveUpTimer;
-  function cleanup(){clearInterval(iv);clearInterval(pollTimer);clearTimeout(giveUpTimer);}
+  var done=false;
+  function cleanup(){clearInterval(iv);if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}}
   function toComplete(){if(done)return;done=true;cleanup();resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
   function toError(msg){if(done)return;done=true;cleanup();document.getElementById('med-loading').classList.remove('show');document.getElementById('medical-card').classList.remove('hidden');document.getElementById('med-a').classList.remove('hidden');showErr('med-a-err',msg);setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');}
 
@@ -501,13 +514,13 @@ async function medStart(){
   btnLoad('med-a-btn',false,'간편인증 요청');
 
   // jobKey로 결과 폴링 (긴 요청이 없어 모바일에서 끊길 게 없음)
-  pollTimer=setInterval(function(){
+  medPollTimer=setInterval(function(){
     callGAS('medical_complete',{jobKey:jobKey})
       .then(function(d){ if(d&&d.success) toComplete(); })
       .catch(function(e){ if(e&&e.serverError) toError(e.message); }); // 서버 에러(조회없음 등)만 폼복귀
   },5000);
   // 4분 내 결과 없으면 안내
-  giveUpTimer=setTimeout(function(){ toError('인증 확인이 지연되고 있습니다. 휴대폰 인증을 완료하셨는지 확인 후 다시 시도해 주세요.'); },240000);
+  medGiveUpTimer=setTimeout(function(){ toError('인증 확인이 지연되고 있습니다. 휴대폰 인증을 완료하셨는지 확인 후 다시 시도해 주세요.'); },240000);
 }
 
 /* ═══ 회원가입 ═══ */
