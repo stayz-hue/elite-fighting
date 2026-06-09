@@ -215,6 +215,15 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
       <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 건강보험심사평가원 진료내역(상병명 포함) 조회에만 사용되며 저장하지 않습니다.</div>
       <button class="btn btn-outline" onclick="goBack()" style="margin-top:14px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
     </div>
+    <div id="med-b" class="hidden">
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">📱</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">휴대폰에서 인증을 확인해 주세요</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">선택하신 <b id="med-auth-name">카카오톡</b> 앱에서<br>인증 요청을 승인한 뒤 아래 버튼을 눌러주세요.</div>
+      </div>
+      <button class="btn btn-primary" id="med-b-btn" onclick="medComplete()">인증 완료 · 진료내역 조회</button>
+      <div class="error-msg" id="med-b-err"></div>
+    </div>
   </div>
 </div>
 
@@ -344,7 +353,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medjob-2026-06-08','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-med2step-2026-06-09','color:#c8851a;font-weight:bold;');
 
 // 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
 // → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
@@ -364,10 +373,12 @@ var medPollTimer=null,medGiveUpTimer=null;
 function medUIReset(){
   if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}
   if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}
-  clearErr('med-a-err');
+  clearErr('med-a-err');clearErr('med-b-err');
   btnLoad('med-a-btn',false,'간편인증 요청');
+  btnLoad('med-b-btn',false,'인증 완료 · 진료내역 조회');
   document.getElementById('med-loading').classList.remove('show');
   document.getElementById('med-a').classList.remove('hidden');
+  document.getElementById('med-b').classList.add('hidden');
 }
 function medBackHome(){ medUIReset(); goHome(); }
 var regState={userName:'',birth:'',ssnBack:'',mobileCo:'SKT',authType:'mobile',mobileNo:'',step_data:'',proxy:'',userId:'',userPw:'',email:''};
@@ -418,7 +429,7 @@ function goMedical(){goService('medical');}
 function goIncome(){goService('income');}
 function goInsurance(){goService('insurance');}
 function goBack(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}resetBack();curSvc='';['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
-function goHome(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}btnLoad('med-a-btn',false,'간편인증 요청');resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
+function goHome(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}btnLoad('med-a-btn',false,'간편인증 요청');resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b','med-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
 function toggleTelco(){var isPass=document.getElementById('inc-auth').value==='pass';document.getElementById('inc-telco-wrap').classList.toggle('hidden',!isPass);}
 
 /* ═══ 보험 ═══ */
@@ -480,7 +491,7 @@ async function incComplete(){
 /* ═══ 소득 완료 화면 ═══ */
 function showIncComplete(){document.getElementById('inc-complete').classList.add('show');}
 
-/* ═══ 숨은 보험금(진료내역) — init 즉시반환(백그라운드 트리거) + jobKey 폴링 ═══ */
+/* ═══ 숨은 보험금(진료내역) — 2-step: init=발송(+stepData) / complete=조회 ═══ */
 async function medStart(){
   clearErr('med-a-err');
   var name=document.getElementById('med-name').value.trim();
@@ -492,35 +503,35 @@ async function medStart(){
   if(ssn1.length!==6||ssn2.length!==7){showErr('med-a-err','주민번호를 정확히 입력해 주세요.');return;}
 
   medState={name:name,ssn1:ssn1,ssn2:ssn2,mobileNo:phone,step:step,staff_email:STAFF_EMAIL};
+  var authNames={kakao:'카카오톡',pass:'PASS',toss:'토스',naver:'네이버',kb:'KB스타뱅킹',shinhan:'신한인증서',payco:'페이코',banksalad:'뱅크샐러드'};
+  document.getElementById('med-auth-name').textContent=authNames[step]||step;
 
   btnLoad('med-a-btn',true);
+  try{
+    var data=await callGAS('medical_init',medState);
+    medState.stepData=data.stepData;
+    medState.userData=data.userData;
+    medState.cookieData=data.cookieData;
+    document.getElementById('med-a').classList.add('hidden');
+    document.getElementById('med-b').classList.remove('hidden');
+    goForward(function(){document.getElementById('med-b').classList.add('hidden');document.getElementById('med-a').classList.remove('hidden');});
+  }catch(e){showErr('med-a-err',e.message);}
+  finally{btnLoad('med-a-btn',false,'간편인증 요청');}
+}
+
+async function medComplete(){
+  clearErr('med-b-err');
+  btnLoad('med-b-btn',true);
   document.getElementById('medical-card').classList.add('hidden');
   setStep(2);
   document.getElementById('med-loading').classList.add('show');
   var steps=['mls1','mls2','mls3','mls4'],idx=0;
-  var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},1200);
-
+  var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},900);
   var done=false;
-  function cleanup(){clearInterval(iv);if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}}
-  function toComplete(){if(done)return;done=true;cleanup();resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
-  function toError(msg){if(done)return;done=true;cleanup();document.getElementById('med-loading').classList.remove('show');document.getElementById('medical-card').classList.remove('hidden');document.getElementById('med-a').classList.remove('hidden');showErr('med-a-err',msg);setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');}
-
-  var jobKey='';
-  try{
-    var data=await callGAS('medical_init',medState);  // 즉시 반환(백그라운드 트리거 예약만)
-    jobKey=data.jobKey||'';
-  }catch(e){ toError(e.message||'요청 실패'); return; }
-  if(!jobKey){ toError('요청 처리 중 오류가 발생했습니다.'); return; }
-  btnLoad('med-a-btn',false,'간편인증 요청');
-
-  // jobKey로 결과 폴링 (긴 요청이 없어 모바일에서 끊길 게 없음)
-  medPollTimer=setInterval(function(){
-    callGAS('medical_complete',{jobKey:jobKey})
-      .then(function(d){ if(d&&d.success) toComplete(); })
-      .catch(function(e){ if(e&&e.serverError) toError(e.message); }); // 서버 에러(조회없음 등)만 폼복귀
-  },5000);
-  // 4분 내 결과 없으면 안내
-  medGiveUpTimer=setTimeout(function(){ toError('인증 확인이 지연되고 있습니다. 휴대폰 인증을 완료하셨는지 확인 후 다시 시도해 주세요.'); },240000);
+  function toComplete(){if(done)return;done=true;clearInterval(iv);resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
+  function toError(msg){if(done)return;done=true;clearInterval(iv);document.getElementById('med-loading').classList.remove('show');document.getElementById('medical-card').classList.remove('hidden');document.getElementById('med-a').classList.remove('hidden');document.getElementById('med-b').classList.add('hidden');showErr('med-a-err',msg);setStep(1);btnLoad('med-b-btn',false,'인증 완료 · 진료내역 조회');}
+  try{ await callGAS('medical_complete',medState); toComplete(); }
+  catch(e){ toError(e.message||'조회에 실패했습니다.'); }
 }
 
 /* ═══ 회원가입 ═══ */
