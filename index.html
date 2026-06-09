@@ -353,7 +353,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-med1yr-2026-06-09','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-medchunk-2026-06-09','color:#c8851a;font-weight:bold;');
 
 // 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
 // → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
@@ -514,7 +514,13 @@ async function medStart(){
   function toComplete(){if(done)return;done=true;clearInterval(iv);resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
   function toError(msg){if(done)return;done=true;clearInterval(iv);document.getElementById('med-loading').classList.remove('show');document.getElementById('medical-card').classList.remove('hidden');document.getElementById('med-a').classList.remove('hidden');showErr('med-a-err',msg);setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');}
 
-  try{ await callGAS('medical_init',medState); toComplete(); }
+  try{
+    var d1=await callGAS('medical_init',medState);          // 인증+최근1년 (푸시·승인 여기서)
+    var sessionKey=d1.sessionKey||'';
+    if(!sessionKey) throw new Error('세션 생성 실패');
+    await callGAS('medical_chunk',{sessionKey:sessionKey, ssn1:ssn1, ssn2:ssn2, step:step});  // 세션재사용+나머지4년
+    toComplete();
+  }
   catch(e){ toError(e.message||'조회에 실패했습니다.'); }
 }
 
