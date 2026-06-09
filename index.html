@@ -353,7 +353,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medchunk-2026-06-09','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-medchunk-dbg-2026-06-09','color:#c8851a;font-weight:bold;');
 
 // 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
 // → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
@@ -518,7 +518,8 @@ async function medStart(){
     var d1=await callGAS('medical_init',medState);          // 인증+최근1년 (푸시·승인 여기서)
     var sessionKey=d1.sessionKey||'';
     if(!sessionKey) throw new Error('세션 생성 실패');
-    await callGAS('medical_chunk',{sessionKey:sessionKey, ssn1:ssn1, ssn2:ssn2, step:step});  // 세션재사용+나머지4년
+    var d2=await callGAS('medical_chunk',{sessionKey:sessionKey, ssn1:ssn1, ssn2:ssn2, step:step});  // 세션재사용+나머지4년
+    alert('[디버그]\ninit: cookie='+d1.cookiePresent+' / 1년='+d1.year1Count+'건\nchunk: success='+(d2&&d2.success)+' / 진료='+((d2&&d2.basic_list||[]).length)+'건 / 기간='+(d2&&d2.query_years||'-')+'\nmsg='+(d2&&d2.message||'-'));
     toComplete();
   }
   catch(e){ toError(e.message||'조회에 실패했습니다.'); }
