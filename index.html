@@ -364,7 +364,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medanyid2-2026-06-11','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-medjobkey-2026-06-11','color:#c8851a;font-weight:bold;');
 
 // 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
 // → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
@@ -548,12 +548,10 @@ async function medRun(){
     }
   }
 
-  var jobKey='';
-  try{
-    var data=await callGAS('medical_init',medState);   // 즉시 반환 (긴 호출은 Lambda가 잡음)
-    jobKey=data.jobKey||'';
-  }catch(e){ toError(e.message||'요청 실패'); return; }
-  if(!jobKey){ toError('요청 처리 중 오류가 발생했습니다.'); return; }
+  // jobKey를 폰에서 선생성 → init 응답이 유실(카톡 전환 등)돼도 폴링이 결과를 찾음
+  var jobKey='med_'+String(medState.mobileNo||'').replace(/[^0-9]/g,'').slice(-4)+'_'+Date.now();
+  callGAS('medical_init',Object.assign({jobKey:jobKey},medState))
+    .catch(function(e){ if(e&&e.serverError) toError(e.message||'요청 실패'); });
   btnLoad('med-a-btn',false,'간편인증 요청');
 
   // jobKey 폴링 — 앱 전환 등으로 fetch가 일시 실패해도 무시하고 계속(서버 에러만 화면 처리)
