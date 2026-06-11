@@ -215,6 +215,26 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
       <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 건강보험심사평가원 진료내역(상병명 포함) 조회에만 사용되며 저장하지 않습니다.</div>
       <button class="btn btn-outline" onclick="goBack()" style="margin-top:14px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
     </div>
+    <div id="med-anyid" class="hidden">
+      <div style="text-align:center;padding:8px 0 4px;">
+        <div style="font-size:44px;margin-bottom:12px;">🔐</div>
+        <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:10px;">처음 한 번만, 본인 등록이 필요해요</div>
+        <div style="font-size:13.5px;color:var(--muted);line-height:1.7;">
+          건강보험심사평가원을 처음 이용하시는 경우<br>
+          <b>심사평가원 홈페이지에서 간편인증 로그인 1회</b>가 필요합니다.<br>
+          <span style="color:var(--hint);font-size:12.5px;">한 번 등록하면 다음부터는 이 과정 없이 바로 조회됩니다.</span>
+        </div>
+      </div>
+      <div style="background:rgba(28,43,74,0.04);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:16px 0 14px;font-size:13px;color:var(--navy);line-height:1.9;">
+        <b>1.</b> 아래 버튼으로 심사평가원 접속<br>
+        <b>2.</b> <b>로그인 → 간편인증</b>으로 로그인 (1분)<br>
+        <b>3.</b> 이 화면으로 돌아와 <b>다시 조회하기</b>
+      </div>
+      <button class="btn btn-primary" onclick="window.open('https://www.hira.or.kr','_blank')" style="margin-bottom:10px;">1️⃣ 심사평가원에서 등록하기</button>
+      <button class="btn btn-primary" id="med-retry-btn" onclick="medRetry()">2️⃣ 등록 완료 · 다시 조회하기</button>
+      <div class="error-msg" id="med-anyid-err"></div>
+      <button class="btn btn-outline" onclick="medAnyidBack()" style="margin-top:12px;font-size:12px;color:var(--hint);">← 처음으로</button>
+    </div>
   </div>
 </div>
 
@@ -344,7 +364,7 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medlambda-2026-06-09','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-medanyid-2026-06-09','color:#c8851a;font-weight:bold;');
 
 // 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
 // → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
@@ -364,9 +384,10 @@ var medPollTimer=null,medGiveUpTimer=null;
 function medUIReset(){
   if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}
   if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}
-  clearErr('med-a-err');
+  clearErr('med-a-err');clearErr('med-anyid-err');
   btnLoad('med-a-btn',false,'간편인증 요청');
   document.getElementById('med-loading').classList.remove('show');
+  document.getElementById('med-anyid').classList.add('hidden');
   document.getElementById('med-a').classList.remove('hidden');
 }
 function medBackHome(){ medUIReset(); goHome(); }
@@ -492,18 +513,40 @@ async function medStart(){
   if(ssn1.length!==6||ssn2.length!==7){showErr('med-a-err','주민번호를 정확히 입력해 주세요.');return;}
 
   medState={name:name,ssn1:ssn1,ssn2:ssn2,mobileNo:phone,step:step,staff_email:STAFF_EMAIL};
+  medRun();
+}
 
+// 보존된 medState로 조회 실행 (최초/재시도 공용)
+async function medRun(){
+  clearErr('med-a-err');clearErr('med-anyid-err');
+  document.getElementById('med-anyid').classList.add('hidden');
+  document.getElementById('med-a').classList.remove('hidden');
   btnLoad('med-a-btn',true);
   document.getElementById('medical-card').classList.add('hidden');
   setStep(2);
   document.getElementById('med-loading').classList.add('show');
   var steps=['mls1','mls2','mls3','mls4'],idx=0;
+  steps.forEach(function(s){var el=document.getElementById(s);el.classList.remove('active');el.classList.remove('done');});
   var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},1200);
 
   var done=false;
   function cleanup(){clearInterval(iv);if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}}
   function toComplete(){if(done)return;done=true;cleanup();resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
-  function toError(msg){if(done)return;done=true;cleanup();document.getElementById('med-loading').classList.remove('show');document.getElementById('medical-card').classList.remove('hidden');document.getElementById('med-a').classList.remove('hidden');showErr('med-a-err',msg);setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');}
+  function toError(msg){
+    if(done)return;done=true;cleanup();
+    document.getElementById('med-loading').classList.remove('show');
+    document.getElementById('medical-card').classList.remove('hidden');
+    setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');
+    if(/LOGIN-004|AnyID|통합인증/i.test(String(msg||''))){
+      // 심평원 최초 이용자 → 1회 등록 안내 화면 (입력값은 medState에 보존됨)
+      document.getElementById('med-a').classList.add('hidden');
+      document.getElementById('med-anyid').classList.remove('hidden');
+      goForward(function(){medAnyidBack();});
+    } else {
+      document.getElementById('med-a').classList.remove('hidden');
+      showErr('med-a-err',msg);
+    }
+  }
 
   var jobKey='';
   try{
@@ -520,6 +563,18 @@ async function medStart(){
       .catch(function(e){ toError(e.message||'조회에 실패했습니다.'); });
   },5000);
   medGiveUpTimer=setTimeout(function(){ toError('인증 확인이 지연되고 있습니다. 휴대폰 인증을 완료하셨는지 확인 후 다시 시도해 주세요.'); },240000);
+}
+
+// 등록 완료 후 재시도: 입력 재요청 없이 보존된 정보로 즉시 재조회
+function medRetry(){
+  if(!medState||!medState.name){ medAnyidBack(); return; }
+  medRun();
+}
+function medAnyidBack(){
+  document.getElementById('med-anyid').classList.add('hidden');
+  document.getElementById('med-a').classList.remove('hidden');
+  clearErr('med-anyid-err');
+  resetBack();
 }
 
 /* ═══ 회원가입 ═══ */
