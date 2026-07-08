@@ -28,15 +28,6 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 .usp-ph-closing-msg{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:10px;}.usp-ph-brand{font-size:19px;font-weight:800;color:#fff;margin-bottom:4px;}.usp-ph-brand-sub{font-size:11px;color:rgba(240,200,122,.62);padding-bottom:18px;}
 .usp-cdots{display:flex;justify-content:center;gap:5px;margin-top:14px;}.usp-cdot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .3s;cursor:pointer;}.usp-cdot.active{width:18px;border-radius:2px;background:var(--gold);}
 
-.svc-select{padding:36px 22px 56px;}.svc-title{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:20px;padding-left:4px;letter-spacing:-.3px;}
-.svc-grid{display:flex;flex-direction:column;gap:18px;}
-.svc-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:48px 26px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:24px;min-height:192px;text-align:left;}.svc-card:hover{border-color:var(--navy);}
-.svc-icon{width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:42px;flex-shrink:0;line-height:1;background:var(--navy-lt);}
-.svc-card.svc-income .svc-icon{background:var(--gold-lt);}
-.svc-card.svc-medical .svc-icon{background:var(--green-lt);}
-.svc-text{flex:1;}.svc-name{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.3px;}.svc-desc{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7;}
-.svc-arrow{font-size:26px;color:var(--hint);flex-shrink:0;font-weight:300;}
-
 .steps{display:flex;align-items:center;padding:7px 18px;background:#fff;border-bottom:1px solid var(--border);}.step-item{display:flex;align-items:center;gap:7px;flex:1;font-size:11.5px;color:var(--hint);font-weight:500;}.step-item.active{color:var(--navy);}.step-item.done{color:var(--gold);}
 .step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint);background:#fff;transition:all .25s;}.step-item.active .step-dot{background:var(--navy);border-color:var(--navy);color:#fff;}.step-item.done .step-dot{background:var(--gold);border-color:var(--gold);color:#fff;}
 .step-line{flex:1;height:1px;background:var(--border);margin:0 4px;}
@@ -48,7 +39,6 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.ssn-wrap{display:flex;align-items:center;gap:10px;}.ssn-wrap .form-input{flex:1;}.ssn-dash{color:var(--hint);font-size:20px;}
 .btn{width:100%;padding:12px;border-radius:10px;border:none;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;}.btn-primary{background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(28,43,74,.25);}.btn-primary:hover{background:#243660;}.btn-primary:disabled{background:var(--border);color:var(--hint);cursor:default;box-shadow:none;}
 .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--muted);margin-top:9px;font-weight:500;}.btn-outline:hover{background:var(--gray);}
-.divider{display:flex;align-items:center;gap:10px;margin:18px 0;font-size:11.5px;color:var(--hint);}.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
 .security-note{display:flex;align-items:flex-start;gap:7px;background:var(--navy-lt);border:1px solid #d0d8e8;border-radius:8px;padding:10px 13px;margin-top:14px;font-size:11.5px;color:var(--navy);line-height:1.55;}
 .error-msg{background:#fef0ef;border:1px solid #f5c0bb;border-radius:8px;padding:11px 14px;font-size:13px;color:var(--red);margin-top:12px;display:none;line-height:1.5;}.error-msg.show{display:block;}
 
@@ -67,13 +57,13 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 .footer{text-align:center;padding:20px 22px 30px;font-size:11px;color:var(--hint);line-height:1.7;margin-top:auto;}
 .hidden{display:none!important;}
-@media print{.header,.trust-bar,.usp,.svc-select,.steps,.footer,.no-print{display:none!important;}body{background:#fff!important;}.app-shell{box-shadow:none!important;width:100%!important;zoom:1!important;}@page{size:A4;margin:12mm;}}
+@media print{.header,.trust-bar,.usp,.steps,.footer,.no-print{display:none!important;}body{background:#fff!important;}.app-shell{box-shadow:none!important;width:100%!important;zoom:1!important;}@page{size:A4;margin:12mm;}}
 </style>
 </head>
 <body>
 <div class="app-shell">
 <div class="header">
-  <img class="header-logo" src="data:image/jpeg;base64,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" alt="엘리트손해사정법인 로고">
+  <img class="header-logo" src="data:image/jpeg;base64,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" alt="엘리트손해사정법인 로고">
   <div><div class="header-name"><span>엘리트</span>손해사정법인</div><div class="header-sub">Claims Survey &amp; Adjusting</div></div>
 </div>
 <div class="trust-bar">
@@ -94,66 +84,15 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
 
 <div id="page-wrap">
 
-<!-- 서비스 선택 -->
-<div class="svc-select" id="svc-select">
-  <div class="svc-title">분석 서비스 선택</div>
-  <div class="svc-grid">
-    <div class="svc-card" onclick="selectSvc('insurance')">
-      <div class="svc-icon">📋</div>
-      <div class="svc-text">
-        <div class="svc-name">보험계약 조회</div>
-        <div class="svc-desc">내보험다보여(credit4u)<br>가입 보험 전체 분석</div>
-      </div>
-      <div class="svc-arrow">›</div>
-    </div>
-    <div class="svc-card svc-medical" onclick="selectSvc('medical')">
-      <div class="svc-icon">🔍</div>
-      <div class="svc-text">
-        <div class="svc-name">숨겨진 보험금 찾기</div>
-        <div class="svc-desc">건강보험심사평가원 진료내역<br>청구 누락 보험금 추적</div>
-      </div>
-      <div class="svc-arrow">›</div>
-    </div>
-    <div class="svc-card svc-income" onclick="selectSvc('income')">
-      <div class="svc-icon">💰</div>
-      <div class="svc-text">
-        <div class="svc-name">소득정보 조회</div>
-        <div class="svc-desc">홈택스 간편인증<br>소득 입증 자료 조회</div>
-      </div>
-      <div class="svc-arrow">›</div>
-    </div>
-  </div>
-</div>
-
 <!-- 스텝바 -->
-<div class="steps hidden" id="step-bar">
-  <div class="step-item active" id="s1"><div class="step-dot" id="sd1">1</div><span id="sl1">로그인</span></div><div class="step-line"></div>
+<div class="steps" id="step-bar">
+  <div class="step-item active" id="s1"><div class="step-dot" id="sd1">1</div><span id="sl1">인증</span></div><div class="step-line"></div>
   <div class="step-item" id="s2"><div class="step-dot" id="sd2">2</div><span>분석중</span></div><div class="step-line"></div>
   <div class="step-item" id="s3"><div class="step-dot" id="sd3">3</div><span>완료</span></div>
 </div>
 
-<!-- 보험 로그인 -->
-<div class="card hidden" id="login-card">
-  <div class="card-header"><div class="card-title">credit4u 로그인 <span class="card-badge">내보험다보여</span></div><div class="card-sub">기존 계정으로 로그인해 주세요</div></div>
-  <div class="card-body">
-    <div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="login-id" placeholder="아이디" autocomplete="off"></div>
-    <div class="form-group" style="margin-bottom:22px;"><label class="form-label">비밀번호</label><input class="form-input" type="password" id="login-pw" placeholder="비밀번호"></div>
-    <button class="btn btn-primary" id="login-btn" onclick="doLogin()">보험 분석 시작하기</button>
-    <div class="error-msg" id="login-err"></div>
-    <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 암호화 전송되며 저장하지 않습니다.</div>
-    <div style="display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:12.5px;">
-      <a href="#" onclick="showC('find-id');return false;" style="color:var(--muted);text-decoration:none;">아이디 찾기</a>
-      <span style="color:var(--border);">|</span>
-      <a href="#" onclick="showC('find-pw');return false;" style="color:var(--muted);text-decoration:none;">비밀번호 찾기</a>
-    </div>
-    <div class="divider">계정이 없으신가요?</div>
-    <button class="btn btn-outline" onclick="showC('register')">신규 회원가입</button>
-    <button class="btn btn-outline" onclick="goBack()" style="margin-top:6px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
-  </div>
-</div>
-
 <!-- 소득 간편인증 -->
-<div class="card hidden" id="income-card">
+<div class="card" id="income-card">
   <div class="card-header"><div class="card-title">홈택스 간편인증 <span class="card-badge">소득정보</span></div><div class="card-sub">본인인증 후 소득정보를 자동 조회합니다</div></div>
   <div class="card-body">
     <div id="inc-a">
@@ -178,7 +117,6 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
       <button class="btn btn-primary" id="inc-a-btn" onclick="incStart()">간편인증 요청</button>
       <div class="error-msg" id="inc-a-err"></div>
       <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 홈택스 인증에만 사용되며 저장하지 않습니다.</div>
-      <button class="btn btn-outline" onclick="goBack()" style="margin-top:14px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
     </div>
     <div id="inc-b" class="hidden">
       <div style="text-align:center;padding:20px 0;">
@@ -192,183 +130,20 @@ body{font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;background
   </div>
 </div>
 
-<!-- 숨은 보험금 (심평원 진료내역) -->
-<div class="card hidden" id="medical-card">
-  <div class="card-header"><div class="card-title">간편인증 <span class="card-badge">진료내역</span></div><div class="card-sub">본인인증 후 최근 5년 진료내역을 조회합니다</div></div>
-  <div class="card-body">
-    <div id="med-a">
-      <div class="form-group"><label class="form-label">이름</label><input class="form-input" type="text" id="med-name" placeholder="홍길동"></div>
-      <div class="form-group">
-        <label class="form-label">주민등록번호</label>
-        <div class="ssn-wrap">
-          <input class="form-input" type="text" id="med-ssn1" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('med-ssn2').focus()">
-          <span class="ssn-dash">-</span>
-          <input class="form-input" type="password" id="med-ssn2" placeholder="뒤 7자리" maxlength="7" inputmode="numeric">
-        </div>
-      </div>
-      <div class="form-group"><label class="form-label">휴대폰번호</label><input class="form-input" type="tel" id="med-phone" placeholder="01012345678" inputmode="numeric"></div>
-      <div class="form-group"><label class="form-label">간편인증</label>
-        <select class="form-input" id="med-auth"><option value="kakao">카카오톡</option><option value="pass">PASS</option><option value="toss">토스</option><option value="naver">네이버</option><option value="kb">KB스타뱅킹</option><option value="shinhan">신한인증서</option><option value="payco">페이코</option><option value="banksalad">뱅크샐러드</option></select>
-      </div>
-      <button class="btn btn-primary" id="med-a-btn" onclick="medStart()">간편인증 요청</button>
-      <div class="error-msg" id="med-a-err"></div>
-      <div class="security-note"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L2 3v4c0 3 2.2 5.4 5 6 2.8-.6 5-3 5-6V3L7 1z" stroke="#1c2b4a" stroke-width="1.2" stroke-linejoin="round"/></svg>입력 정보는 건강보험심사평가원 진료내역(상병명 포함) 조회에만 사용되며 저장하지 않습니다.</div>
-      <button class="btn btn-outline" onclick="goBack()" style="margin-top:14px;font-size:12px;color:var(--hint);">← 서비스 선택</button>
-    </div>
-    <div id="med-anyid" class="hidden">
-      <div style="text-align:center;padding:8px 0 4px;">
-        <div style="font-size:44px;margin-bottom:12px;">🔐</div>
-        <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:10px;">처음 한 번만, 본인 등록이 필요해요</div>
-        <div style="font-size:13.5px;color:var(--muted);line-height:1.7;">
-          건강보험심사평가원을 처음 이용하시는 경우<br>
-          <b>심사평가원 홈페이지에서 간편인증 로그인 1회</b>가 필요합니다.<br>
-          <span style="color:var(--hint);font-size:12.5px;">한 번 등록하면 다음부터는 이 과정 없이 바로 조회됩니다.</span>
-        </div>
-      </div>
-      <div style="background:rgba(28,43,74,0.04);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:16px 0 14px;font-size:13px;color:var(--navy);line-height:1.9;">
-        <b>1.</b> 아래 버튼으로 심사평가원 접속<br>
-        <b>2.</b> <b>로그인 → 간편인증</b>으로 로그인 (1분)<br>
-        <b>3.</b> 이 화면으로 돌아와 <b>다시 조회하기</b>
-      </div>
-      <button class="btn btn-primary" onclick="window.open('https://www.hira.or.kr','_blank')" style="margin-bottom:10px;">1️⃣ 심사평가원에서 등록하기</button>
-      <button class="btn btn-primary" id="med-retry-btn" onclick="medRetry()">2️⃣ 등록 완료 · 다시 조회하기</button>
-      <div class="error-msg" id="med-anyid-err"></div>
-      <button class="btn btn-outline" onclick="medAnyidBack()" style="margin-top:12px;font-size:12px;color:var(--hint);">← 처음으로</button>
-    </div>
-  </div>
-</div>
-
-<!-- 회원가입 (보험용) -->
-<div class="card hidden" id="register-card">
-  <div class="card-header"><div class="card-title">credit4u 회원가입</div><div class="card-sub">본인인증을 통해 계정을 생성합니다</div></div>
-  <div class="card-body">
-    <div id="reg-a">
-      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="r-name" placeholder="홍길동"></div>
-      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="r-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('r-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="r-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="r-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="r-phone" placeholder="01012345678" inputmode="numeric"></div></div>
-      <button class="btn btn-primary" id="reg-a-btn" onclick="regA()">인증번호 받기</button><div class="error-msg" id="reg-a-err"></div>
-      <button class="btn btn-outline" onclick="showC('login')">← 이미 계정이 있어요</button>
-    </div>
-    <div id="reg-b" class="hidden">
-      <div class="form-group"><label class="form-label">보안 문자</label><div id="captcha-box" style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="captcha-img-el" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
-      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="r-captcha" placeholder="숫자" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="reg-b-btn" onclick="regB()">확인</button><div class="error-msg" id="reg-b-err"></div>
-    </div>
-    <div id="reg-c" class="hidden">
-      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="r-sms" placeholder="6자리" inputmode="numeric"></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="r-id" placeholder="아이디"></div><div class="form-group"><label class="form-label">비밀번호</label><input class="form-input" type="password" id="r-pw" placeholder="비밀번호"></div></div>
-      <div class="form-group"><label class="form-label">이메일</label><input class="form-input" type="email" id="r-email" placeholder="email@example.com"></div>
-<button class="btn btn-primary" id="reg-c-btn" onclick="regC()">다음 · 이메일 인증</button><div class="error-msg" id="reg-c-err"></div>
-    </div>
-    <div id="reg-d" class="hidden">
-      <div style="text-align:center;padding:10px 0 16px;"><div style="font-size:40px;margin-bottom:10px;">📧</div><div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">이메일로 인증번호를 보냈습니다</div><div style="font-size:12.5px;color:var(--muted);line-height:1.6;">입력하신 이메일에 도착한 <b>인증번호</b>를 입력해 주세요.<br>(문자(SMS) 번호와는 다른 번호입니다)</div></div>
-      <div class="form-group"><label class="form-label">이메일 인증번호</label><input class="form-input" type="text" id="r-email-code" placeholder="이메일로 받은 번호" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="reg-d-btn" onclick="regD()">가입 완료</button><div class="error-msg" id="reg-d-err"></div>
-    </div>
-  </div>
-</div>
-
-<!-- 아이디 찾기 -->
-<div class="card hidden" id="find-id-card">
-  <div class="card-header"><div class="card-title">아이디 찾기 <span class="card-badge">credit4u</span></div><div class="card-sub">본인인증 후 아이디를 알려드립니다</div></div>
-  <div class="card-body">
-    <div id="fid-a">
-      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="fid-name" placeholder="홍길동"></div>
-      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="fid-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('fid-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="fid-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="fid-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="fid-phone" placeholder="01012345678" inputmode="numeric"></div></div>
-      <button class="btn btn-primary" id="fid-a-btn" onclick="fidA()">인증번호 받기</button>
-      <div class="error-msg" id="fid-a-err"></div>
-      <button class="btn btn-outline" onclick="showC('login')" style="margin-top:10px;">← 로그인으로</button>
-    </div>
-    <div id="fid-b" class="hidden">
-      <div class="form-group"><label class="form-label">보안 문자</label><div style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="fid-captcha-img" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="fid-captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
-      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="fid-captcha-input" placeholder="숫자" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="fid-b-btn" onclick="fidB()">확인</button>
-      <div class="error-msg" id="fid-b-err"></div>
-    </div>
-    <div id="fid-c" class="hidden">
-      <div style="text-align:center;padding:10px 0 20px;"><div style="font-size:40px;margin-bottom:10px;">📱</div><div style="font-size:14px;color:var(--muted);line-height:1.6;">휴대폰으로 전송된<br>인증번호를 입력해 주세요.</div></div>
-      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="fid-sms" placeholder="6자리" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="fid-c-btn" onclick="fidC()">아이디 찾기</button>
-      <div class="error-msg" id="fid-c-err"></div>
-    </div>
-    <div id="fid-d" class="hidden">
-      <div class="complete-emblem" style="margin:20px auto;">✓</div>
-      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:10px;">본인인증이 완료됐습니다</div><div style="font-size:14px;color:var(--muted);line-height:1.7;">아이디를 카카오톡 알림톡으로<br>보내드렸습니다.<br>휴대폰을 확인해 주세요.</div></div>
-      <button class="btn btn-primary" onclick="showC('login')">로그인 화면으로</button>
-    </div>
-  </div>
-</div>
-
-<!-- 비밀번호 찾기 -->
-<div class="card hidden" id="find-pw-card">
-  <div class="card-header"><div class="card-title">비밀번호 찾기 <span class="card-badge">credit4u</span></div><div class="card-sub">본인인증 후 비밀번호를 재설정합니다</div></div>
-  <div class="card-body">
-    <div id="fpw-a">
-      <div class="form-group"><label class="form-label">아이디</label><input class="form-input" type="text" id="fpw-id" placeholder="아이디"></div>
-      <div class="form-group"><label class="form-label">성명</label><input class="form-input" type="text" id="fpw-name" placeholder="홍길동"></div>
-      <div class="form-group"><label class="form-label">주민등록번호</label><div class="ssn-wrap"><input class="form-input" type="text" id="fpw-ssn-front" placeholder="앞 6자리" maxlength="6" inputmode="numeric" oninput="if(this.value.length===6)document.getElementById('fpw-ssn-back').focus()"><span class="ssn-dash">-</span><input class="form-input" type="password" id="fpw-ssn-back" placeholder="뒤 7자리" maxlength="7" inputmode="numeric"></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">통신사</label><select class="form-input" id="fpw-telco"><option value="SKT">SKT</option><option value="KTF">KT</option><option value="LGT">LG U+</option><option value="SKM">SKT 알뜰</option><option value="KTM">KT 알뜰</option><option value="LGM">LG 알뜰</option></select></div><div class="form-group"><label class="form-label">휴대폰</label><input class="form-input" type="tel" id="fpw-phone" placeholder="01012345678" inputmode="numeric"></div></div>
-      <button class="btn btn-primary" id="fpw-a-btn" onclick="fpwA()">인증번호 받기</button>
-      <div class="error-msg" id="fpw-a-err"></div>
-      <button class="btn btn-outline" onclick="showC('login')" style="margin-top:10px;">← 로그인으로</button>
-    </div>
-    <div id="fpw-b" class="hidden">
-      <div class="form-group"><label class="form-label">보안 문자</label><div style="background:var(--gray);border:1.5px solid var(--border);border-radius:9px;padding:18px;text-align:center;margin-bottom:14px;"><img id="fpw-captcha-img" class="hidden" style="max-width:100%;border-radius:6px;" alt=""><div id="fpw-captcha-loading" style="font-size:13px;color:var(--hint);">로딩중...</div></div></div>
-      <div class="form-group"><label class="form-label">보안 문자 입력</label><input class="form-input" type="text" id="fpw-captcha-input" placeholder="숫자" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="fpw-b-btn" onclick="fpwB()">확인</button>
-      <div class="error-msg" id="fpw-b-err"></div>
-    </div>
-    <div id="fpw-c" class="hidden">
-      <div style="text-align:center;padding:10px 0 20px;"><div style="font-size:40px;margin-bottom:10px;">📱</div><div style="font-size:14px;color:var(--muted);line-height:1.6;">휴대폰으로 전송된<br>인증번호를 입력해 주세요.</div></div>
-      <div class="form-group"><label class="form-label">SMS 인증번호</label><input class="form-input" type="text" id="fpw-sms" placeholder="6자리" inputmode="numeric"></div>
-      <button class="btn btn-primary" id="fpw-c-btn" onclick="fpwC()">임시 비밀번호 받기</button>
-      <div class="error-msg" id="fpw-c-err"></div>
-    </div>
-    <div id="fpw-d" class="hidden">
-      <div style="text-align:center;padding:10px 0 14px;"><div style="font-size:14px;color:var(--navy);font-weight:700;margin-bottom:6px;">임시 비밀번호가 카카오톡으로 발송됐습니다</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">받으신 임시 비밀번호와<br>새로 사용할 비밀번호를 입력해 주세요.</div></div>
-      <div class="form-group"><label class="form-label">임시 비밀번호 (알림톡 수신)</label><input class="form-input" type="text" id="fpw-tmp" placeholder="임시 비밀번호"></div>
-      <div class="form-group"><label class="form-label">새 비밀번호</label><input class="form-input" type="password" id="fpw-new" placeholder="8자 이상"></div>
-      <div class="form-group"><label class="form-label">새 비밀번호 확인</label><input class="form-input" type="password" id="fpw-new2" placeholder="새 비밀번호 확인"></div>
-      <button class="btn btn-primary" id="fpw-d-btn" onclick="fpwD()">비밀번호 변경</button>
-      <div class="error-msg" id="fpw-d-err"></div>
-    </div>
-    <div id="fpw-e" class="hidden">
-      <div class="complete-emblem" style="margin:20px auto;">✓</div>
-      <div style="text-align:center;padding:0 0 20px;"><div style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:8px;">비밀번호 변경 완료</div><div style="font-size:13px;color:var(--muted);">새 비밀번호로 로그인해 주세요.</div></div>
-      <button class="btn btn-primary" onclick="showC('login')">로그인 화면으로</button>
-    </div>
-  </div>
-</div>
-
-<!-- 로딩 (보험) -->
-<div class="loading-wrap" id="loading"><div class="spinner"></div><div class="loading-text">보험계약 분석 중</div><div class="loading-sub">잠시만 기다려 주세요</div><div class="loading-steps"><div class="ls-item" id="ls1"><div class="ls-icon">1</div>정액형 보장계약 조회</div><div class="ls-item" id="ls2"><div class="ls-icon">2</div>실손형 보장계약 조회</div><div class="ls-item" id="ls3"><div class="ls-icon">3</div>자동차보험 조회</div><div class="ls-item" id="ls4"><div class="ls-icon">4</div>분석 완료</div></div></div>
-
 <!-- 로딩 (소득) -->
 <div class="loading-wrap" id="inc-loading"><div class="spinner"></div><div class="loading-text">소득정보 조회 중</div><div class="loading-sub">홈택스 데이터를 가져오고 있습니다</div><div class="loading-steps"><div class="ls-item" id="ils1"><div class="ls-icon">1</div>소득금액증명 조회</div><div class="ls-item" id="ils2"><div class="ls-icon">2</div>소득내역 상세 조회</div><div class="ls-item" id="ils3"><div class="ls-icon">3</div>데이터 분석</div><div class="ls-item" id="ils4"><div class="ls-icon">4</div>완료</div></div></div>
 
-<!-- 로딩 (진료내역) -->
-<div class="loading-wrap" id="med-loading"><div class="spinner"></div><div class="loading-text">📱 휴대폰에서 인증을 완료해 주세요</div><div class="loading-sub">인증 후 진료내역을 조회합니다 · 최대 1~2분 소요</div><div class="loading-steps"><div class="ls-item" id="mls1"><div class="ls-icon">1</div>본인인증 확인</div><div class="ls-item" id="mls2"><div class="ls-icon">2</div>진료내역 조회</div><div class="ls-item" id="mls3"><div class="ls-icon">3</div>상병·검사 분석</div><div class="ls-item" id="mls4"><div class="ls-icon">4</div>완료</div></div><button class="btn btn-outline" onclick="medBackHome()" style="margin-top:22px;max-width:220px;margin-left:auto;margin-right:auto;font-size:13px;">← 처음으로</button></div>
-
-<!-- 완료 (보험) -->
-<div class="complete-wrap" id="complete"><div class="complete-emblem">✓</div><div class="complete-title">분석 완료!</div><div class="complete-body">보험계약 정보 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1일 이내 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">추가 청구 가능 보험금 상세 안내</div></div></div><button class="btn btn-primary" onclick="goMedical()" style="margin-top:20px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-primary" onclick="goIncome()" style="margin-top:8px;">💰 소득정보도 조회하기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
-
 <!-- 완료 (소득) -->
-<div class="complete-wrap" id="inc-complete"><div class="complete-emblem">💰</div><div class="complete-title">소득정보 분석 완료!</div><div class="complete-body">소득정보 조회 및 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div></div><button class="btn btn-primary" onclick="goInsurance()" style="margin-top:20px;">📋 보험계약도 조회하기</button><button class="btn btn-primary" onclick="goMedical()" style="margin-top:8px;">🔍 숨겨진 보험금도 찾아보기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
-
-<!-- 완료 (진료내역) -->
-<div class="complete-wrap" id="med-complete"><div class="complete-emblem">🔍</div><div class="complete-title">진료내역 분석 완료!</div><div class="complete-body">최근 5년 진료내역 조회가 완료됐습니다.<br>청구 누락 가능 건을 검토해 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">사고·고가검사 이력 기반 추가청구 가능성 검토</div></div></div><button class="btn btn-primary" onclick="goInsurance()" style="margin-top:20px;">📋 보험계약도 조회하기</button><button class="btn btn-primary" onclick="goIncome()" style="margin-top:8px;">💰 소득정보도 조회하기</button><button class="btn btn-outline" onclick="goHome()" style="margin-top:8px;font-size:13px;">← 처음으로 가기</button></div>
+<div class="complete-wrap" id="inc-complete"><div class="complete-emblem">💰</div><div class="complete-title">소득정보 분석 완료!</div><div class="complete-body">소득정보 조회 및 분석이 완료됐습니다.<br>담당자가 빠르게 연락드리겠습니다.</div><div class="complete-card"><div class="complete-card-title">안내</div><div class="complete-row"><div class="cr-dot"></div><div class="cr-text">영업일 1~2일 이내 담당자가 연락드립니다</div></div></div><button class="btn btn-outline" onclick="goHome()" style="margin-top:20px;font-size:13px;">← 처음으로 가기</button></div>
 
 </div><!-- page-wrap -->
 </div><!-- app-shell -->
 
 <script>
 // === 빌드 식별 배너 (반영 확인용) ===
-console.log('%c[BUILD] v-medjobkey-2026-06-11','color:#c8851a;font-weight:bold;');
+console.log('%c[BUILD] v-income-only-2026-07-08','color:#c8851a;font-weight:bold;');
 
-// 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊겨 진료내역 조회가 안 됨.
-// → 카톡 인앱 + 안드로이드면 즉시 기기 기본 브라우저(크롬/삼성인터넷)로 빠져나간다.
-//   iOS 인앱은 인증이 정상 이어지므로 건드리지 않는다. (외부브라우저로 나가면 UA에 KAKAOTALK 없어 재실행 안 됨)
+// 안드로이드 카카오톡 인앱브라우저는 인증 앱 전환 시 세션이 끊길 수 있어 기본 브라우저로 이탈.
 (function kakaoExternalAndroid(){
   var ua = navigator.userAgent || '';
   if(/KAKAOTALK/i.test(ua) && /Android/i.test(ua)){
@@ -378,22 +153,9 @@ console.log('%c[BUILD] v-medjobkey-2026-06-11','color:#c8851a;font-weight:bold;'
 
 var GAS_URL="https://script.google.com/macros/s/AKfycbxuYfGlk6DgWHn-uor9m-uicU2DG7XLW8BQMKAyMVo7za-TcfF6Is1DbwZb3_Jobc_2/exec";
 var STAFF_EMAIL=new URLSearchParams(location.search).get('to')||'stayz@naver.com';
-var curSvc='',incState={},medState={};
-var medPollTimer=null,medGiveUpTimer=null;
-// 진료내역 UI/폴링 상태 초기화 (탭 재진입·뒤로가기 시 버튼 굳음·유령 폴링 방지)
-function medUIReset(){
-  if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}
-  if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}
-  clearErr('med-a-err');clearErr('med-anyid-err');
-  btnLoad('med-a-btn',false,'간편인증 요청');
-  document.getElementById('med-loading').classList.remove('show');
-  document.getElementById('med-anyid').classList.add('hidden');
-  document.getElementById('med-a').classList.remove('hidden');
-}
-function medBackHome(){ medUIReset(); goHome(); }
-var regState={userName:'',birth:'',ssnBack:'',mobileCo:'SKT',authType:'mobile',mobileNo:'',step_data:'',proxy:'',userId:'',userPw:'',email:''};
+var incState={};
 
-/* ═══ 브라우저 뒤로가기 보완: 인증 중 뒤로가기 시 첫 페이지로 튕기지 않고 직전 화면으로 ═══ */
+/* ═══ 브라우저 뒤로가기 보완 ═══ */
 var backStack=[];
 function goForward(restoreFn){backStack.push(restoreFn);try{history.pushState({n:backStack.length},'');}catch(_){}}
 function resetBack(){backStack=[];}
@@ -407,44 +169,12 @@ if(!data.success&&data.message){var err=new Error(data.message);err.serverError=
   return data;
 }
 
-function showC(v){['login-card','register-card','income-card','medical-card','find-id-card','find-pw-card'].forEach(function(id){document.getElementById(id).classList.add('hidden');});if(v)document.getElementById(v+'-card').classList.remove('hidden');}
 function setStep(n){for(var i=1;i<=3;i++){var si=document.getElementById('s'+i),d=document.getElementById('sd'+i);si.classList.remove('active','done');if(i<n){si.classList.add('done');d.textContent='✓';}else if(i===n){si.classList.add('active');d.textContent=i;}else d.textContent=i;}}
 function showErr(id,msg){var el=document.getElementById(id);el.textContent=msg;el.classList.add('show');}
 function clearErr(id){document.getElementById(id).classList.remove('show');}
 function btnLoad(id,on,txt){var b=document.getElementById(id);b.disabled=on;if(on)b.textContent='처리 중...';else if(txt)b.textContent=txt;}
-
-function selectSvc(svc){
-  medUIReset();
-  curSvc=svc;
-  document.getElementById('svc-select').classList.add('hidden');
-  document.getElementById('step-bar').classList.remove('hidden');
-  document.getElementById('sl1').textContent=(svc==='income'||svc==='medical')?'인증':'로그인';
-  setStep(1);
-  showC(svc==='income'?'income':(svc==='medical'?'medical':'login'));
-  goForward(goBack);
-}
-function goService(svc){
-  medUIReset();
-  ['complete','inc-complete','med-complete'].forEach(function(id){document.getElementById(id).classList.remove('show');});
-  document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');
-  document.getElementById('med-a').classList.remove('hidden');
-  curSvc=svc;
-  document.getElementById('step-bar').classList.remove('hidden');
-  document.getElementById('sl1').textContent=(svc==='income'||svc==='medical')?'인증':'로그인';
-  setStep(1);
-  showC(svc==='income'?'income':(svc==='medical'?'medical':'login'));
-  goForward(goBack);
-}
-function goMedical(){goService('medical');}
-function goIncome(){goService('income');}
-function goInsurance(){goService('insurance');}
-function goBack(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}resetBack();curSvc='';['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
-function goHome(){if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}btnLoad('med-a-btn',false,'간편인증 요청');resetBack();curSvc='';incState={};medState={};['login-card','income-card','medical-card','register-card','find-id-card','find-pw-card','step-bar','complete','inc-complete','med-complete','loading','inc-loading','med-loading'].forEach(function(id){var el=document.getElementById(id);el.classList.add('hidden');el.classList.remove('show');});['inc-a','med-a'].forEach(function(id){document.getElementById(id).classList.remove('hidden');});['inc-b'].forEach(function(id){document.getElementById(id).classList.add('hidden');});document.getElementById('svc-select').classList.remove('hidden');}
 function toggleTelco(){var isPass=document.getElementById('inc-auth').value==='pass';document.getElementById('inc-telco-wrap').classList.toggle('hidden',!isPass);}
-
-/* ═══ 보험 ═══ */
-async function doLogin(){clearErr('login-err');var uid=document.getElementById('login-id').value.trim(),pw=document.getElementById('login-pw').value;if(!uid||!pw){showErr('login-err','아이디/비밀번호를 입력해 주세요.');return;}btnLoad('login-btn',true);showC(null);await runInsurance(uid,pw);}
-async function runInsurance(uid,pw){setStep(2);document.getElementById('loading').classList.add('show');var steps=['ls1','ls2','ls3','ls4'],idx=0;var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},700);try{await callGAS('analyze',{userId:uid,userPw:pw,staff_email:STAFF_EMAIL});clearInterval(iv);steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('loading').classList.remove('show');setStep(3);resetBack();document.getElementById('complete').classList.add('show');},800);}catch(e){clearInterval(iv);document.getElementById('loading').classList.remove('show');showC('login');showErr('login-err',e.message);setStep(1);btnLoad('login-btn',false,'보험 분석 시작하기');}}
+function goHome(){resetBack();incState={};document.getElementById('inc-complete').classList.remove('show');document.getElementById('inc-loading').classList.remove('show');document.getElementById('income-card').classList.remove('hidden');document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');btnLoad('inc-b-btn',false,'인증 완료 · 소득정보 조회');setStep(1);}
 
 /* ═══ 소득 — Step 1: init ═══ */
 async function incStart(){
@@ -489,213 +219,13 @@ async function incComplete(){
   var steps=['ils1','ils2','ils3','ils4'],idx=0;
   var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},900);
   var done=false,timer;
-  function toComplete(){if(done)return;done=true;clearInterval(iv);clearTimeout(timer);resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);showIncComplete();},600);}
+  function toComplete(){if(done)return;done=true;clearInterval(iv);clearTimeout(timer);resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('inc-loading').classList.remove('show');setStep(3);document.getElementById('inc-complete').classList.add('show');},600);}
   function toError(msg){if(done)return;done=true;clearInterval(iv);clearTimeout(timer);document.getElementById('inc-loading').classList.remove('show');document.getElementById('income-card').classList.remove('hidden');document.getElementById('inc-a').classList.remove('hidden');document.getElementById('inc-b').classList.add('hidden');showErr('inc-a-err',msg);setStep(1);btnLoad('inc-b-btn',false,'인증 완료 · 소득정보 조회');}
   // 조회량이 많으면 응답이 1~2분 걸려 모바일에서 끊길 수 있음. 서버는 백그라운드로 계속 처리·전송하므로
   // 45초 넘게 지연되거나 연결이 끊기면 완료로 넘기고, '서버가 준 진짜 오류'일 때만 폼으로 되돌림.
   timer=setTimeout(toComplete,45000);
   try{ await callGAS('income_complete',incState); toComplete(); }
   catch(e){ if(e&&e.serverError) toError(e.message); else toComplete(); }
-}
-
-/* ═══ 소득 완료 화면 ═══ */
-function showIncComplete(){document.getElementById('inc-complete').classList.add('show');}
-
-/* ═══ 숨은 보험금(진료내역) — init 즉시반환(Lambda 워커) + jobKey 폴링 ═══ */
-async function medStart(){
-  clearErr('med-a-err');
-  var name=document.getElementById('med-name').value.trim();
-  var ssn1=document.getElementById('med-ssn1').value.trim();
-  var ssn2=document.getElementById('med-ssn2').value.trim();
-  var phone=document.getElementById('med-phone').value.trim();
-  var step=document.getElementById('med-auth').value;
-  if(!name||!ssn1||!ssn2||!phone){showErr('med-a-err','모든 항목을 입력해 주세요.');return;}
-  if(ssn1.length!==6||ssn2.length!==7){showErr('med-a-err','주민번호를 정확히 입력해 주세요.');return;}
-
-  medState={name:name,ssn1:ssn1,ssn2:ssn2,mobileNo:phone,step:step,staff_email:STAFF_EMAIL};
-  medRun();
-}
-
-// 보존된 medState로 조회 실행 (최초/재시도 공용)
-async function medRun(){
-  clearErr('med-a-err');clearErr('med-anyid-err');
-  document.getElementById('med-anyid').classList.add('hidden');
-  document.getElementById('med-a').classList.remove('hidden');
-  btnLoad('med-a-btn',true);
-  document.getElementById('medical-card').classList.add('hidden');
-  setStep(2);
-  document.getElementById('med-loading').classList.add('show');
-  var steps=['mls1','mls2','mls3','mls4'],idx=0;
-  steps.forEach(function(s){var el=document.getElementById(s);el.classList.remove('active');el.classList.remove('done');});
-  var iv=setInterval(function(){if(idx>0){document.getElementById(steps[idx-1]).classList.remove('active');document.getElementById(steps[idx-1]).classList.add('done');}if(idx<steps.length){document.getElementById(steps[idx]).classList.add('active');idx++;}else clearInterval(iv);},1200);
-
-  var done=false;
-  function cleanup(){clearInterval(iv);if(medPollTimer){clearInterval(medPollTimer);medPollTimer=null;}if(medGiveUpTimer){clearTimeout(medGiveUpTimer);medGiveUpTimer=null;}}
-  function toComplete(){if(done)return;done=true;cleanup();resetBack();steps.forEach(function(s){document.getElementById(s).classList.remove('active');document.getElementById(s).classList.add('done');});setTimeout(function(){document.getElementById('med-loading').classList.remove('show');setStep(3);document.getElementById('med-complete').classList.add('show');},600);}
-  function toError(msg){
-    if(done)return;done=true;cleanup();
-    document.getElementById('med-loading').classList.remove('show');
-    document.getElementById('medical-card').classList.remove('hidden');
-    setStep(1);btnLoad('med-a-btn',false,'간편인증 요청');
-    if(/LOGIN-004|AnyID|통합인증/i.test(String(msg||''))){
-      // 심평원 최초 이용자 → 1회 등록 안내 화면 (입력값은 medState에 보존됨)
-      document.getElementById('med-a').classList.add('hidden');
-      document.getElementById('med-anyid').classList.remove('hidden');
-      goForward(function(){medAnyidBack();});
-    } else {
-      document.getElementById('med-a').classList.remove('hidden');
-      showErr('med-a-err',msg);
-    }
-  }
-
-  // jobKey를 폰에서 선생성 → init 응답이 유실(카톡 전환 등)돼도 폴링이 결과를 찾음
-  var jobKey='med_'+String(medState.mobileNo||'').replace(/[^0-9]/g,'').slice(-4)+'_'+Date.now();
-  callGAS('medical_init',Object.assign({jobKey:jobKey},medState))
-    .catch(function(e){ if(e&&e.serverError) toError(e.message||'요청 실패'); });
-  btnLoad('med-a-btn',false,'간편인증 요청');
-
-  // jobKey 폴링 — 앱 전환 등으로 fetch가 일시 실패해도 무시하고 계속(서버 에러만 화면 처리)
-  medPollTimer=setInterval(function(){
-    callGAS('medical_complete',{jobKey:jobKey})
-      .then(function(d){ if(d&&d.success) toComplete(); })
-      .catch(function(e){ if(e&&e.serverError) toError(e.message||'조회에 실패했습니다.'); });
-  },5000);
-  medGiveUpTimer=setTimeout(function(){ toError('인증 확인이 지연되고 있습니다. 휴대폰 인증을 완료하셨는지 확인 후 다시 시도해 주세요.'); },240000);
-}
-
-// 등록 완료 후 재시도: 입력 재요청 없이 보존된 정보로 즉시 재조회
-function medRetry(){
-  if(!medState||!medState.name){ medAnyidBack(); return; }
-  medRun();
-}
-function medAnyidBack(){
-  document.getElementById('med-anyid').classList.add('hidden');
-  document.getElementById('med-a').classList.remove('hidden');
-  clearErr('med-anyid-err');
-  resetBack();
-}
-
-/* ═══ 회원가입 ═══ */
-async function regA(){clearErr('reg-a-err');var name=document.getElementById('r-name').value.trim(),phone=document.getElementById('r-phone').value.trim(),telco=document.getElementById('r-telco').value,f=document.getElementById('r-ssn-front').value.trim(),b=document.getElementById('r-ssn-back').value.trim();if(!name||!f||!b||!phone){showErr('reg-a-err','모든 항목을 입력해 주세요.');return;}var yp=parseInt(b[0])<=2?'19':'20';Object.assign(regState,{userName:name,birth:yp+f,ssnBack:b,mobileCo:telco,mobileNo:phone});btnLoad('reg-a-btn',true);try{var data=await callGAS('register_init',regState);regState.step_data=data.step_data;regState.proxy=data.proxy;if(data.captcha_img){var img=document.getElementById('captcha-img-el');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('captcha-loading').classList.add('hidden');}document.getElementById('reg-a').classList.add('hidden');document.getElementById('reg-b').classList.remove('hidden');}catch(e){showErr('reg-a-err',e.message);}finally{btnLoad('reg-a-btn',false,'인증번호 받기');}}
-async function regB(){clearErr('reg-b-err');var c=document.getElementById('r-captcha').value.trim();if(!c){showErr('reg-b-err','보안 문자 입력');return;}btnLoad('reg-b-btn',true);try{var data=await callGAS('register_captcha',Object.assign({},regState,{captcha_input:c}));regState.step_data=data.step_data;regState.proxy=data.proxy;document.getElementById('reg-b').classList.add('hidden');document.getElementById('reg-c').classList.remove('hidden');}catch(e){showErr('reg-b-err',e.message);}finally{btnLoad('reg-b-btn',false,'확인');}}
-async function regC(){clearErr('reg-c-err');var sms=document.getElementById('r-sms').value.trim(),id=document.getElementById('r-id').value.trim(),pw=document.getElementById('r-pw').value,em=document.getElementById('r-email').value.trim();if(!sms||!id||!pw||!em){showErr('reg-c-err','모든 항목 입력');return;}Object.assign(regState,{userId:id,userPw:pw,email:em});btnLoad('reg-c-btn',true);try{var sd=await callGAS('register_sms',Object.assign({},regState,{sms_input:sms}));regState.step_data=sd.step_data;regState.proxy=sd.proxy;document.getElementById('reg-c').classList.add('hidden');document.getElementById('reg-d').classList.remove('hidden');}catch(e){showErr('reg-c-err',e.message);}finally{btnLoad('reg-c-btn',false,'다음 · 이메일 인증');}}
-async function regD(){clearErr('reg-d-err');var ec=document.getElementById('r-email-code').value.trim();if(!ec){showErr('reg-d-err','이메일 인증번호를 입력해 주세요.');return;}btnLoad('reg-d-btn',true);try{await callGAS('register_email',Object.assign({},regState,{email_input:ec}));showC(null);await runInsurance(regState.userId,regState.userPw);}catch(e){showErr('reg-d-err',e.message);btnLoad('reg-d-btn',false,'가입 완료');}}
-
-/* ═══ 아이디 찾기 ═══ */
-var fidState={};
-async function fidA(){
-  clearErr('fid-a-err');
-  var name=document.getElementById('fid-name').value.trim(),f=document.getElementById('fid-ssn-front').value.trim(),b=document.getElementById('fid-ssn-back').value.trim(),telco=document.getElementById('fid-telco').value,phone=document.getElementById('fid-phone').value.trim();
-  if(!name||!f||!b||!phone){showErr('fid-a-err','모든 항목을 입력해 주세요.');return;}
-  if(f.length!==6||b.length!==7){showErr('fid-a-err','주민번호를 정확히 입력해 주세요.');return;}
-  var yp=parseInt(b[0])<=2?'19':'20';
-  fidState={userName:name,birth:yp+f,gender:b[0],mobileCo:telco,authType:'mobile',mobileNo:phone};
-  btnLoad('fid-a-btn',true);
-  try{
-    var data=await callGAS('find_id_init',fidState);
-    fidState.step_data=data.step_data;fidState.proxy=data.proxy;
-    if(data.captcha_img){var img=document.getElementById('fid-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fid-captcha-loading').classList.add('hidden');}
-    document.getElementById('fid-a').classList.add('hidden');
-    document.getElementById('fid-b').classList.remove('hidden');
-  }catch(e){showErr('fid-a-err',e.message);}
-  finally{btnLoad('fid-a-btn',false,'인증번호 받기');}
-}
-async function fidB(){
-  clearErr('fid-b-err');
-  var c=document.getElementById('fid-captcha-input').value.trim();
-  if(!c){showErr('fid-b-err','보안 문자를 입력해 주세요.');return;}
-  btnLoad('fid-b-btn',true);
-  try{
-    var data=await callGAS('find_id_captcha',Object.assign({},fidState,{step_input:c}));
-    fidState.step_data=data.step_data;fidState.proxy=data.proxy;
-    if(data.captcha_img){
-      document.getElementById('fid-captcha-img').src='data:image/jpeg;base64,'+data.captcha_img;
-      document.getElementById('fid-captcha-input').value='';
-      showErr('fid-b-err','보안문자를 다시 입력해 주세요.');
-    }else{
-      document.getElementById('fid-b').classList.add('hidden');
-      document.getElementById('fid-c').classList.remove('hidden');
-    }
-  }catch(e){showErr('fid-b-err',e.message);}
-  finally{btnLoad('fid-b-btn',false,'확인');}
-}
-async function fidC(){
-  clearErr('fid-c-err');
-  var s=document.getElementById('fid-sms').value.trim();
-  if(!s){showErr('fid-c-err','인증번호를 입력해 주세요.');return;}
-  btnLoad('fid-c-btn',true);
-  try{
-    await callGAS('find_id_sms',Object.assign({},fidState,{step_input:s,sendMethod:'mobile'}));
-    document.getElementById('fid-c').classList.add('hidden');
-    document.getElementById('fid-d').classList.remove('hidden');
-  }catch(e){showErr('fid-c-err',e.message);}
-  finally{btnLoad('fid-c-btn',false,'아이디 찾기');}
-}
-
-/* ═══ 비밀번호 찾기 ═══ */
-var fpwState={};
-async function fpwA(){
-  clearErr('fpw-a-err');
-  var uid=document.getElementById('fpw-id').value.trim(),name=document.getElementById('fpw-name').value.trim(),f=document.getElementById('fpw-ssn-front').value.trim(),b=document.getElementById('fpw-ssn-back').value.trim(),telco=document.getElementById('fpw-telco').value,phone=document.getElementById('fpw-phone').value.trim();
-  if(!uid||!name||!f||!b||!phone){showErr('fpw-a-err','모든 항목을 입력해 주세요.');return;}
-  if(f.length!==6||b.length!==7){showErr('fpw-a-err','주민번호를 정확히 입력해 주세요.');return;}
-  var yp=parseInt(b[0])<=2?'19':'20';
-  fpwState={userId:uid,userName:name,birth:yp+f,gender:b[0],mobileCo:telco,authType:'mobile',mobileNo:phone};
-  btnLoad('fpw-a-btn',true);
-  try{
-    var data=await callGAS('find_pw_init',fpwState);
-    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
-    if(data.captcha_img){var img=document.getElementById('fpw-captcha-img');img.src='data:image/jpeg;base64,'+data.captcha_img;img.classList.remove('hidden');document.getElementById('fpw-captcha-loading').classList.add('hidden');}
-    document.getElementById('fpw-a').classList.add('hidden');
-    document.getElementById('fpw-b').classList.remove('hidden');
-  }catch(e){showErr('fpw-a-err',e.message);}
-  finally{btnLoad('fpw-a-btn',false,'인증번호 받기');}
-}
-async function fpwB(){
-  clearErr('fpw-b-err');
-  var c=document.getElementById('fpw-captcha-input').value.trim();
-  if(!c){showErr('fpw-b-err','보안 문자를 입력해 주세요.');return;}
-  btnLoad('fpw-b-btn',true);
-  try{
-    var data=await callGAS('find_pw_captcha',Object.assign({},fpwState,{step_input:c}));
-    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
-    if(data.captcha_img){
-      document.getElementById('fpw-captcha-img').src='data:image/jpeg;base64,'+data.captcha_img;
-      document.getElementById('fpw-captcha-input').value='';
-      showErr('fpw-b-err','보안문자를 다시 입력해 주세요.');
-    }else{
-      document.getElementById('fpw-b').classList.add('hidden');
-      document.getElementById('fpw-c').classList.remove('hidden');
-    }
-  }catch(e){showErr('fpw-b-err',e.message);}
-  finally{btnLoad('fpw-b-btn',false,'확인');}
-}
-async function fpwC(){
-  clearErr('fpw-c-err');
-  var s=document.getElementById('fpw-sms').value.trim();
-  if(!s){showErr('fpw-c-err','인증번호를 입력해 주세요.');return;}
-  btnLoad('fpw-c-btn',true);
-  try{
-    var data=await callGAS('find_pw_sms',Object.assign({},fpwState,{step_input:s,sendMethod:'mobile'}));
-    fpwState.step_data=data.step_data;fpwState.proxy=data.proxy;
-    document.getElementById('fpw-c').classList.add('hidden');
-    document.getElementById('fpw-d').classList.remove('hidden');
-  }catch(e){showErr('fpw-c-err',e.message);}
-  finally{btnLoad('fpw-c-btn',false,'임시 비밀번호 받기');}
-}
-async function fpwD(){
-  clearErr('fpw-d-err');
-  var tmp=document.getElementById('fpw-tmp').value.trim(),np=document.getElementById('fpw-new').value,np2=document.getElementById('fpw-new2').value;
-  if(!tmp||!np||!np2){showErr('fpw-d-err','모든 항목을 입력해 주세요.');return;}
-  if(np!==np2){showErr('fpw-d-err','새 비밀번호가 일치하지 않습니다.');return;}
-  if(np.length<8){showErr('fpw-d-err','비밀번호는 8자 이상으로 설정해 주세요.');return;}
-  btnLoad('fpw-d-btn',true);
-  try{
-    await callGAS('find_pw_change',Object.assign({},fpwState,{tmpPw:tmp,userPw:np}));
-    document.getElementById('fpw-d').classList.add('hidden');
-    document.getElementById('fpw-e').classList.remove('hidden');
-  }catch(e){showErr('fpw-d-err',e.message);}
-  finally{btnLoad('fpw-d-btn',false,'비밀번호 변경');}
 }
 
 /* USP */
